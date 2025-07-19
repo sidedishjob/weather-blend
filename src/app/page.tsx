@@ -1,31 +1,33 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { LocationSearch } from "@/components/location-search"
 import { WeatherCard } from "@/components/weather-card"
 import { WeatherSources } from "@/components/weather-sources"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Cloud } from "lucide-react"
+import { Cloud, Sparkles, TrendingUp, Zap } from "lucide-react"
 
 // モックデータ（実際のAPIと接続時に置き換え）
 const mockWeatherData = {
   "東京": {
-    jma: { temperature: 22, weather: "晴れ", precipitation: 10, source: "気象庁" },
-    yahoo: { temperature: 24, weather: "晴れ時々曇り", precipitation: 20, source: "Yahoo!天気" }
+    jma: { temperature: 22, weather: "晴れ", precipitation: 10, source: "気象庁", humidity: 65, windSpeed: 12 },
+    yahoo: { temperature: 24, weather: "晴れ時々曇り", precipitation: 20, source: "Yahoo!天気", humidity: 68, windSpeed: 15 }
   },
   "大阪": {
-    jma: { temperature: 25, weather: "曇り", precipitation: 30, source: "気象庁" },
-    yahoo: { temperature: 26, weather: "曇り時々晴れ", precipitation: 25, source: "Yahoo!天気" }
+    jma: { temperature: 25, weather: "曇り", precipitation: 30, source: "気象庁", humidity: 72, windSpeed: 8 },
+    yahoo: { temperature: 26, weather: "曇り時々晴れ", precipitation: 25, source: "Yahoo!天気", humidity: 70, windSpeed: 10 }
   },
   "札幌": {
-    jma: { temperature: 15, weather: "雨", precipitation: 80, source: "気象庁" },
-    yahoo: { temperature: 16, weather: "小雨", precipitation: 70, source: "Yahoo!天気" }
+    jma: { temperature: 15, weather: "雨", precipitation: 80, source: "気象庁", humidity: 85, windSpeed: 18 },
+    yahoo: { temperature: 16, weather: "小雨", precipitation: 70, source: "Yahoo!天気", humidity: 82, windSpeed: 20 }
   }
 }
 
 function calculateBlendedWeather(sources: any[]) {
   const avgTemp = sources.reduce((sum, s) => sum + s.temperature, 0) / sources.length
   const avgPrecipitation = sources.reduce((sum, s) => sum + s.precipitation, 0) / sources.length
+  const avgHumidity = sources.reduce((sum, s) => sum + s.humidity, 0) / sources.length
+  const avgWindSpeed = sources.reduce((sum, s) => sum + s.windSpeed, 0) / sources.length
   
   // 天気の決定ロジック（簡易版）
   let weather = "晴れ"
@@ -37,16 +39,25 @@ function calculateBlendedWeather(sources: any[]) {
     temperature: avgTemp,
     weather,
     precipitation: avgPrecipitation,
-    source: "WeatherBlend"
+    humidity: avgHumidity,
+    windSpeed: avgWindSpeed,
+    source: "WeatherBlend",
+    confidence: Math.max(85, 100 - Math.abs(sources[0].temperature - sources[1].temperature) * 5)
   }
 }
 
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState<string>("")
   const [weatherData, setWeatherData] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [animationKey, setAnimationKey] = useState(0)
 
-  const handleLocationSelect = (location: string) => {
+  const handleLocationSelect = async (location: string) => {
+    setIsLoading(true)
     setSelectedLocation(location)
+    
+    // アニメーション効果のための遅延
+    await new Promise(resolve => setTimeout(resolve, 800))
     
     // モックデータから取得（実際のAPIと接続時に置き換え）
     const locationData = mockWeatherData[location as keyof typeof mockWeatherData]
@@ -57,12 +68,15 @@ export default function Home() {
     } else {
       // デフォルトデータ
       const sources = [
-        { temperature: 20, weather: "晴れ", precipitation: 15, source: "気象庁" },
-        { temperature: 22, weather: "晴れ時々曇り", precipitation: 25, source: "Yahoo!天気" }
+        { temperature: 20, weather: "晴れ", precipitation: 15, source: "気象庁", humidity: 60, windSpeed: 10 },
+        { temperature: 22, weather: "晴れ時々曇り", precipitation: 25, source: "Yahoo!天気", humidity: 65, windSpeed: 12 }
       ]
       const blended = calculateBlendedWeather(sources)
       setWeatherData({ blended, sources })
     }
+    
+    setIsLoading(false)
+    setAnimationKey(prev => prev + 1)
   }
 
   const today = new Date().toLocaleDateString('ja-JP', {
@@ -71,46 +85,110 @@ export default function Home() {
     weekday: 'short'
   })
 
+  const currentTime = new Date().toLocaleTimeString('ja-JP', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* 動的背景エフェクト */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-400/20 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-400/10 via-transparent to-transparent"></div>
+      
+      {/* 浮遊する装飾要素 */}
+      <div className="absolute top-20 left-10 w-2 h-2 bg-purple-400/30 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 right-20 w-1 h-1 bg-blue-400/40 rounded-full animate-ping"></div>
+      <div className="absolute bottom-40 left-20 w-3 h-3 bg-indigo-400/20 rounded-full animate-bounce"></div>
+      
       {/* ヘッダー */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-white/20 sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center space-x-2">
-            <Cloud className="w-8 h-8 text-blue-600" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              WeatherBlend
-            </h1>
+      <header className="relative z-10 bg-white/5 backdrop-blur-xl border-b border-white/10 sticky top-0">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <Cloud className="w-10 h-10 text-white" />
+                <Sparkles className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1 animate-pulse" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+                  WeatherBlend
+                </h1>
+                <p className="text-xs text-white/60 font-medium">AI-Powered Weather Intelligence</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-white/80 text-sm font-medium">{currentTime}</div>
+              <div className="text-white/50 text-xs">{today}</div>
+            </div>
           </div>
         </div>
       </header>
 
       {/* メインコンテンツ */}
-      <main className="container mx-auto px-4 py-8 space-y-8">
+      <main className="container mx-auto px-4 py-8 space-y-8 relative z-10">
         {/* 地点選択 */}
-        <Card className="bg-white/80 backdrop-blur-sm border-white/20">
-          <CardHeader>
-            <CardTitle className="text-lg">地点を選択</CardTitle>
+        <Card className="bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl text-white flex items-center space-x-2">
+              <Zap className="w-5 h-5 text-yellow-400" />
+              <span>スマート地点検索</span>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <LocationSearch onLocationSelect={handleLocationSelect} />
           </CardContent>
         </Card>
 
+        {/* ローディング状態 */}
+        {isLoading && (
+          <div className="text-center py-16 space-y-6">
+            <div className="relative mx-auto w-20 h-20">
+              <div className="absolute inset-0 rounded-full border-4 border-purple-400/30"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-purple-400 animate-spin"></div>
+              <Cloud className="w-8 h-8 text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold text-white">AI解析中...</h3>
+              <p className="text-white/60">複数の気象データを統合しています</p>
+            </div>
+          </div>
+        )}
+
         {/* WeatherBlend予報 */}
-        {weatherData && (
-          <div className="space-y-6">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+        {weatherData && !isLoading && (
+          <div className="space-y-8" key={animationKey}>
+            <div className="text-center space-y-4 animate-fade-in">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm rounded-full px-6 py-2 border border-white/20">
+                <TrendingUp className="w-4 h-4 text-green-400" />
+                <span className="text-white/80 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
+              </div>
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
                 WeatherBlend予報
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-white/70 text-lg">
                 {selectedLocation} • {today}
               </p>
             </div>
             
-            <div className="max-w-md mx-auto">
+            <div className="max-w-md mx-auto transform hover:scale-105 transition-all duration-500">
               <WeatherCard data={weatherData.blended} isBlended={true} />
+            </div>
+
+            {/* 詳細メトリクス */}
+            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+              <Card className="bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl font-bold text-blue-400">{Math.round(weatherData.blended.humidity)}%</div>
+                  <div className="text-white/60 text-sm">湿度</div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl font-bold text-green-400">{Math.round(weatherData.blended.windSpeed)}m/s</div>
+                  <div className="text-white/60 text-sm">風速</div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* 各情報源の詳細 */}
@@ -121,27 +199,54 @@ export default function Home() {
         )}
 
         {/* 初期状態のメッセージ */}
-        {!weatherData && (
-          <div className="text-center py-16 space-y-4">
-            <Cloud className="w-16 h-16 text-blue-300 mx-auto" />
-            <h2 className="text-xl font-semibold text-muted-foreground">
-              地点を選択して天気予報を確認
-            </h2>
-            <p className="text-muted-foreground">
-              複数の情報源から最適な予報をお届けします
-            </p>
+        {!weatherData && !isLoading && (
+          <div className="text-center py-20 space-y-6">
+            <div className="relative mx-auto w-24 h-24">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full animate-pulse"></div>
+              <Cloud className="w-16 h-16 text-white/60 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <div className="space-y-3">
+              <h2 className="text-2xl font-bold text-white">
+                次世代天気予報体験
+              </h2>
+              <p className="text-white/70 max-w-md mx-auto leading-relaxed">
+                AIが複数の気象データを解析し、最も信頼性の高い予報をお届けします
+              </p>
+            </div>
           </div>
         )}
       </main>
 
       {/* フッター */}
-      <footer className="bg-white/60 backdrop-blur-sm border-t border-white/20 mt-16">
-        <div className="container mx-auto px-4 py-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2025 WeatherBlend. 複数の天気予報をブレンドして最適な予報を提供
-          </p>
+      <footer className="relative z-10 bg-white/5 backdrop-blur-xl border-t border-white/10 mt-20">
+        <div className="container mx-auto px-4 py-8">
+          <div className="text-center space-y-4">
+            <div className="flex justify-center items-center space-x-2">
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <span className="text-white/80 text-sm font-medium">Powered by Advanced AI</span>
+            </div>
+            <p className="text-white/50 text-xs">
+              © 2025 WeatherBlend. 革新的な気象予報プラットフォーム
+            </p>
+          </div>
         </div>
       </footer>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+      `}</style>
     </div>
   )
 }
