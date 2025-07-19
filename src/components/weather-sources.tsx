@@ -26,24 +26,24 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
         <CollapsibleTrigger asChild>
           <Button 
             variant="ghost" 
-            className="w-full justify-between p-6 h-auto bg-white/60 backdrop-blur-xl border border-blue-200/40 hover:bg-white/80 hover:border-blue-300/50 transition-all duration-300 group"
+            className="w-full justify-between p-6 h-auto bg-white/80 backdrop-blur-xl border border-blue-300/60 hover:bg-white/90 hover:border-blue-400/70 transition-all duration-300 group"
           >
             <div className="flex items-center space-x-3">
-              <Database className="w-5 h-5 text-blue-500 group-hover:text-blue-600 transition-colors" />
+              <Database className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors" />
               <div className="text-left">
-                <div className="text-blue-800 font-medium">データソース詳細</div>
-                <div className="text-blue-600/70 text-sm">各情報源の個別予報を確認</div>
+                <div className="text-blue-900 font-medium">データソース詳細</div>
+                <div className="text-blue-700 text-sm">各情報源の個別予報を確認</div>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
-                <BarChart3 className="w-4 h-4 text-blue-600/70" />
-                <span className="text-blue-600/70 text-sm">{sources.length}件</span>
+                <BarChart3 className="w-4 h-4 text-blue-700" />
+                <span className="text-blue-700 text-sm">{sources.length}件</span>
               </div>
               {isOpen ? (
-                <ChevronUp className="w-5 h-5 text-blue-600/70 group-hover:text-blue-700 transition-colors" />
+                <ChevronUp className="w-5 h-5 text-blue-700 group-hover:text-blue-800 transition-colors" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-blue-600/70 group-hover:text-blue-700 transition-colors" />
+                <ChevronDown className="w-5 h-5 text-blue-700 group-hover:text-blue-800 transition-colors" />
               )}
             </div>
           </Button>
@@ -58,36 +58,36 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
           </div>
           
           {/* 比較統計 */}
-          <div className="mt-6 p-4 bg-white/60 backdrop-blur-xl border border-blue-200/40 rounded-lg">
+          <div className="mt-6 p-4 bg-white/80 backdrop-blur-xl border border-blue-300/60 rounded-lg">
             <div className="flex items-center space-x-2 mb-4">
-              <BarChart3 className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-700 text-sm font-medium">データ比較</span>
+              <BarChart3 className="w-4 h-4 text-blue-600" />
+              <span className="text-blue-800 text-sm font-medium">データ比較</span>
             </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-blue-600/70">気温差</span>
-                  <span className="text-blue-800 font-medium">
+                  <span className="text-blue-700">気温差</span>
+                  <span className="text-blue-900 font-medium">
                     {Math.abs(sources[0]?.temperature - sources[1]?.temperature).toFixed(1)}°C
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-blue-600/70">降水確率差</span>
-                  <span className="text-blue-800 font-medium">
+                  <span className="text-blue-700">降水確率差</span>
+                  <span className="text-blue-900 font-medium">
                     {Math.abs(sources[0]?.precipitation - sources[1]?.precipitation)}%
                   </span>
                 </div>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-blue-600/70">データ一致度</span>
-                  <span className="text-green-400 font-medium">
+                  <span className="text-blue-700">データ一致度</span>
+                  <span className="text-green-600 font-medium">
                     {Math.max(70, 100 - Math.abs(sources[0]?.temperature - sources[1]?.temperature) * 10)}%
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-blue-600/70">更新時刻</span>
-                  <span className="text-blue-600/70 text-xs">
+                  <span className="text-blue-700">更新時刻</span>
+                  <span className="text-blue-700 text-xs">
                     {new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>

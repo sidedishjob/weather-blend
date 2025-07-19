@@ -97,29 +97,29 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-sky-300/20 via-transparent to-transparent"></div>
       
       {/* 浮遊する装飾要素 */}
-      <div className="absolute top-20 left-10 w-2 h-2 bg-blue-400/40 rounded-full animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-1 h-1 bg-sky-500/50 rounded-full animate-ping"></div>
-      <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-300/30 rounded-full animate-bounce"></div>
+      <div className="absolute top-20 left-10 w-2 h-2 bg-blue-500/60 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 right-20 w-1 h-1 bg-sky-600/70 rounded-full animate-ping"></div>
+      <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-400/50 rounded-full animate-bounce"></div>
       
       {/* ヘッダー */}
-      <header className="relative z-10 bg-white/60 backdrop-blur-xl border-b border-blue-200/30 sticky top-0">
+      <header className="relative z-10 bg-white/80 backdrop-blur-xl border-b border-blue-300/50 sticky top-0 shadow-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <Cloud className="w-10 h-10 text-blue-600" />
-                <Sparkles className="w-4 h-4 text-sky-500 absolute -top-1 -right-1 animate-pulse" />
+                <Cloud className="w-10 h-10 text-blue-700" />
+                <Sparkles className="w-4 h-4 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-sky-600 to-blue-800 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold text-blue-900">
                   WeatherBlend
                 </h1>
-                <p className="text-xs text-blue-600/70 font-medium">複数の天気予報をブレンド</p>
+                <p className="text-xs text-blue-700 font-medium">複数の天気予報をブレンド</p>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-blue-700 text-sm font-medium">{currentTime}</div>
-              <div className="text-blue-600/60 text-xs">{today}</div>
+              <div className="text-blue-800 text-sm font-medium">{currentTime}</div>
+              <div className="text-blue-700 text-xs">{today}</div>
             </div>
           </div>
         </div>
@@ -128,10 +128,10 @@ export default function Home() {
       {/* メインコンテンツ */}
       <main className="container mx-auto px-4 py-8 space-y-8 relative z-10">
         {/* 地点選択 */}
-        <Card className="bg-white/70 backdrop-blur-xl border-blue-200/40 shadow-2xl">
+        <Card className="bg-white/85 backdrop-blur-xl border-blue-300/60 shadow-2xl">
           <CardHeader className="pb-4">
-            <CardTitle className="text-xl text-blue-800 flex items-center space-x-2">
-              <Zap className="w-5 h-5 text-sky-500" />
+            <CardTitle className="text-xl text-blue-900 flex items-center space-x-2">
+              <Zap className="w-5 h-5 text-sky-600" />
               <span>スマート地点検索</span>
             </CardTitle>
           </CardHeader>
@@ -145,12 +145,12 @@ export default function Home() {
           <div className="text-center py-16 space-y-6">
             <div className="relative mx-auto w-20 h-20">
               <div className="absolute inset-0 rounded-full border-4 border-blue-300/40"></div>
-              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-500 animate-spin"></div>
-              <Cloud className="w-8 h-8 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-600 animate-spin"></div>
+              <Cloud className="w-8 h-8 text-blue-700 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl font-semibold text-blue-800">データ解析中...</h3>
-              <p className="text-blue-600/70">複数の気象データを統合しています</p>
+              <h3 className="text-xl font-semibold text-blue-900">データ解析中...</h3>
+              <p className="text-blue-700">複数の気象データを統合しています</p>
             </div>
           </div>
         )}
@@ -159,14 +159,14 @@ export default function Home() {
         {weatherData && !isLoading && (
           <div className="space-y-8" key={animationKey}>
             <div className="text-center space-y-4 animate-fade-in">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/20 to-sky-500/20 backdrop-blur-sm rounded-full px-6 py-2 border border-blue-300/30">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/30 to-sky-500/30 backdrop-blur-sm rounded-full px-6 py-2 border border-blue-400/50">
                 <TrendingUp className="w-4 h-4 text-green-400" />
-                <span className="text-blue-700 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
+                <span className="text-blue-800 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
               </div>
-              <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-sky-600 to-blue-800 bg-clip-text text-transparent">
+              <h2 className="text-4xl font-bold text-blue-900">
                 WeatherBlend予報
               </h2>
-              <p className="text-blue-700/80 text-lg">
+              <p className="text-blue-800 text-lg">
                 {selectedLocation} • {today}
               </p>
             </div>
@@ -177,16 +177,16 @@ export default function Home() {
 
             {/* 詳細メトリクス */}
             <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-              <Card className="bg-white/60 backdrop-blur-xl border-blue-200/30 hover:bg-white/80 transition-all duration-300">
+              <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-400">{Math.round(weatherData.blended.humidity)}%</div>
-                  <div className="text-blue-600/70 text-sm">湿度</div>
+                  <div className="text-2xl font-bold text-blue-600">{Math.round(weatherData.blended.humidity)}%</div>
+                  <div className="text-blue-700 text-sm">湿度</div>
                 </CardContent>
               </Card>
-              <Card className="bg-white/60 backdrop-blur-xl border-blue-200/30 hover:bg-white/80 transition-all duration-300">
+              <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
                 <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-green-400">{Math.round(weatherData.blended.windSpeed)}m/s</div>
-                  <div className="text-blue-600/70 text-sm">風速</div>
+                  <div className="text-2xl font-bold text-green-600">{Math.round(weatherData.blended.windSpeed)}m/s</div>
+                  <div className="text-blue-700 text-sm">風速</div>
                 </CardContent>
               </Card>
             </div>
@@ -202,14 +202,14 @@ export default function Home() {
         {!weatherData && !isLoading && (
           <div className="text-center py-20 space-y-6">
             <div className="relative mx-auto w-24 h-24">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400/30 to-sky-400/30 rounded-full animate-pulse"></div>
-              <Cloud className="w-16 h-16 text-blue-500/70 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/40 to-sky-500/40 rounded-full animate-pulse"></div>
+              <Cloud className="w-16 h-16 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
             </div>
             <div className="space-y-3">
-              <h2 className="text-2xl font-bold text-blue-800">
+              <h2 className="text-2xl font-bold text-blue-900">
                 次世代天気予報体験
               </h2>
-              <p className="text-blue-700/80 max-w-md mx-auto leading-relaxed">
+              <p className="text-blue-800 max-w-md mx-auto leading-relaxed">
                 複数の気象データを統合し、最も信頼性の高い予報をお届けします
               </p>
             </div>
@@ -218,14 +218,14 @@ export default function Home() {
       </main>
 
       {/* フッター */}
-      <footer className="relative z-10 bg-white/60 backdrop-blur-xl border-t border-blue-200/30 mt-20">
+      <footer className="relative z-10 bg-white/80 backdrop-blur-xl border-t border-blue-300/50 mt-20">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center space-y-4">
             <div className="flex justify-center items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-sky-500" />
-              <span className="text-blue-700 text-sm font-medium">複数データ統合システム</span>
+              <Sparkles className="w-4 h-4 text-sky-600" />
+              <span className="text-blue-800 text-sm font-medium">複数データ統合システム</span>
             </div>
-            <p className="text-blue-600/60 text-xs">
+            <p className="text-blue-700 text-xs">
               © 2025 WeatherBlend. 革新的な気象予報プラットフォーム
             </p>
           </div>
