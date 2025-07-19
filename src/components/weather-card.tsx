@@ -56,21 +56,21 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
   return (
     <Card className={`${
       isBlended 
-        ? 'bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-2xl border-2 border-white/30 shadow-2xl hover:shadow-purple-500/20' 
-        : 'bg-white/10 backdrop-blur-xl border-white/20 hover:bg-white/15'
+        ? 'bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-2xl border-2 border-blue-300/40 shadow-2xl hover:shadow-blue-500/20' 
+        : 'bg-white/70 backdrop-blur-xl border-blue-200/30 hover:bg-white/85'
     } transition-all duration-500 group`}>
       <CardContent className={`${isBlended ? 'p-8' : 'p-4'} relative overflow-hidden`}>
         {/* 背景装飾 */}
         {isBlended && (
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 via-transparent to-sky-500/15 opacity-50"></div>
         )}
         
         <div className="relative z-10">
           {isBlended && (
             <div className="text-center mb-6">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/30 to-blue-500/30 backdrop-blur-sm rounded-full px-4 py-1 border border-white/20">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/30 to-sky-500/30 backdrop-blur-sm rounded-full px-4 py-1 border border-blue-300/30">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-white/90 text-sm font-medium">AI統合予報</span>
+                <span className="text-blue-800 text-sm font-medium">統合予報</span>
               </div>
             </div>
           )}
@@ -80,7 +80,7 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
               <div className="relative">
                 {getWeatherIcon(data.weather, isBlended)}
                 {isBlended && (
-                  <div className="absolute -inset-2 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-xl"></div>
+                  <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/30 to-sky-400/30 rounded-full blur-xl"></div>
                 )}
               </div>
               <div className="space-y-2">
@@ -90,7 +90,7 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
                   {Math.round(data.temperature)}°C
                 </div>
                 <div className={`${
-                  isBlended ? 'text-xl text-white/90' : 'text-sm text-white/70'
+                  isBlended ? 'text-xl text-blue-800' : 'text-sm text-blue-700/80'
                 } font-medium`}>
                   {data.weather}
                 </div>
@@ -116,12 +116,12 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
           
           {!isBlended && (
             <div className="mt-3 flex items-center justify-between">
-              <div className="text-xs text-white/50 font-medium">
+              <div className="text-xs text-blue-600/60 font-medium">
                 {data.source}
               </div>
               <div className="flex items-center space-x-1">
-                <Thermometer className="w-3 h-3 text-white/40" />
-                <span className="text-xs text-white/50">
+                <Thermometer className="w-3 h-3 text-blue-500/60" />
+                <span className="text-xs text-blue-600/60">
                   体感温度 {Math.round(data.temperature + (Math.random() - 0.5) * 4)}°C
                 </span>
               </div>
@@ -129,17 +129,17 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
           )}
           
           {isBlended && data.confidence && (
-            <div className="mt-6 pt-4 border-t border-white/20">
+            <div className="mt-6 pt-4 border-t border-blue-200/30">
               <div className="flex items-center justify-between">
-                <span className="text-white/70 text-sm">予報信頼度</span>
+                <span className="text-blue-700/80 text-sm">予報信頼度</span>
                 <div className="flex items-center space-x-2">
-                  <div className="w-20 h-2 bg-white/20 rounded-full overflow-hidden">
+                  <div className="w-20 h-2 bg-blue-200/40 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gradient-to-r from-green-400 to-blue-400 rounded-full transition-all duration-1000"
                       style={{ width: `${data.confidence}%` }}
                     ></div>
                   </div>
-                  <span className="text-white font-medium text-sm">{Math.round(data.confidence)}%</span>
+                  <span className="text-blue-800 font-medium text-sm">{Math.round(data.confidence)}%</span>
                 </div>
               </div>
             </div>
