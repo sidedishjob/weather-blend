@@ -97,6 +97,7 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
                 } font-medium`}>
                   {data.weather}
                 </div>
+                </div>
               </div>
             </div>
             
