@@ -94,7 +94,7 @@ export default function Home() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 relative overflow-hidden flex">
       {/* 動的背景エフェクト */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-300/30 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-sky-300/20 via-transparent to-transparent"></div>
@@ -104,48 +104,44 @@ export default function Home() {
       <div className="absolute top-40 right-20 w-1 h-1 bg-sky-600/70 rounded-full animate-ping"></div>
       <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-400/50 rounded-full animate-bounce"></div>
 
-      {/* ヘッダー */}
-      <header className="relative z-50 bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      {/* 左側サイドバー - 検索エリア */}
+      <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10">
+        <div className="p-6 space-y-6">
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
+              <Search className="w-5 h-5" />
+              <span>地点検索</span>
+            </h2>
+            <LocationSearch onLocationSelect={handleLocationSelect} />
+          </div>
+          
+          {/* ロゴ・時間情報エリア */}
+          <div className="p-6 space-y-6">
             {/* ロゴ */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <Cloud className="w-8 h-8 text-blue-700" />
-                <Sparkles className="w-4 h-4 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
+            <div className="text-center space-y-3">
+              <div className="flex items-center justify-center space-x-3">
+                <div className="relative">
+                  <Cloud className="w-8 h-8 text-blue-700" />
+                  <Sparkles className="w-4 h-4 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-blue-900">WeatherBlend</h1>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-blue-900">WeatherBlend</h1>
-                <p className="text-xs text-blue-700 font-medium hidden sm:block">複数の天気予報をブレンド</p>
-              </div>
+              <p className="text-sm text-blue-700 font-medium">複数の天気予報をブレンド</p>
             </div>
-
+            
             {/* 時間表示 */}
-            <div className="text-right">
-              <div className="text-lg font-bold text-blue-900">{currentTime}</div>
+            <div className="text-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+              <div className="text-2xl font-bold text-blue-900">{currentTime}</div>
               <div className="text-blue-700 text-sm">{today}</div>
             </div>
           </div>
         </div>
-      </header>
+      </aside>
 
-      {/* メインコンテンツ */}
-      <main className="relative z-10 flex-1 flex">
-        {/* 左側サイドバー - 検索エリア */}
-        <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg">
-          <div className="p-6 space-y-6">
-            <div className="space-y-4">
-              <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
-                <Search className="w-5 h-5" />
-                <span>地点検索</span>
-              </h2>
-              <LocationSearch onLocationSelect={handleLocationSelect} />
-            </div>
-          </div>
-        </aside>
-
-        {/* 右側メインエリア - 検索結果 */}
-        <div className="flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto">
+      {/* 右側メインエリア - 検索結果 */}
+      <main className="flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto relative z-10">
         {/* ローディング状態 */}
         {isLoading && (
           <div className="flex items-center justify-center min-h-[60vh]">
@@ -225,23 +221,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        </div>
       </main>
-
-      {/* フッター */}
-      <footer className="relative z-10 py-4 border-t border-blue-300/50 bg-white/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-2">
-            <div className="flex justify-center items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-sky-600" />
-              <span className="text-blue-800 text-sm font-medium">複数データ統合システム</span>
-            </div>
-            <p className="text-blue-700 text-xs">
-              © 2025 WeatherBlend. 革新的な気象予報プラットフォーム
-            </p>
-          </div>
-        </div>
-      </footer>
 
       <style jsx>{`
         @keyframes fade-in {
