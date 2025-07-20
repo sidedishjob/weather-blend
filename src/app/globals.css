@@ -31,6 +31,153 @@
   animation: shimmer 2s infinite;
 }
 
+/* 天気アニメーション */
+@keyframes sunny-rays {
+  0%, 100% { 
+    transform: rotate(0deg) scale(1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes cloud-drift {
+  0% { transform: translateX(-100px); }
+  100% { transform: translateX(calc(100vw + 100px)); }
+}
+
+@keyframes rain-drop {
+  0% { 
+    transform: translateY(-100vh) translateX(0px);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: translateY(100vh) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes snow-fall {
+  0% { 
+    transform: translateY(-100vh) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: translateY(100vh) translateX(-30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes lightning-flash {
+  0%, 90%, 100% { opacity: 0; }
+  5%, 10% { opacity: 0.8; }
+}
+
+/* 晴れアニメーション */
+.weather-sunny {
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-sunny::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 223, 0, 0.3) 0%, rgba(255, 193, 7, 0.2) 40%, transparent 70%);
+  border-radius: 50%;
+  animation: sunny-rays 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.weather-sunny::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 235, 59, 0.4) 0%, rgba(255, 193, 7, 0.3) 60%, transparent 80%);
+  border-radius: 50%;
+  animation: sunny-rays 6s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+/* 雨アニメーション */
+.weather-rainy {
+  position: relative;
+  overflow: hidden;
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.8), rgba(59, 130, 246, 0.3));
+  border-radius: 0 0 2px 2px;
+  animation: rain-drop linear infinite;
+  pointer-events: none;
+}
+
+/* 雪アニメーション */
+.weather-snowy {
+  position: relative;
+  overflow: hidden;
+}
+
+.snow-flake {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: snow-fall linear infinite;
+  pointer-events: none;
+}
+
+/* 曇りアニメーション */
+.weather-cloudy {
+  position: relative;
+  overflow: hidden;
+}
+
+.cloud-element {
+  position: absolute;
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 50px;
+  animation: cloud-drift linear infinite;
+  pointer-events: none;
+}
+
+.cloud-element::before,
+.cloud-element::after {
+  content: '';
+  position: absolute;
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 50px;
+}
+
+.cloud-element::before {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 10px;
+}
+
+.cloud-element::after {
+  width: 60px;
+  height: 60px;
+  top: -35px;
+  right: 10px;
+}
 /* グラスモーフィズム効果の強化 */
 .glass-effect {
   background: rgba(255, 255, 255, 0.1);

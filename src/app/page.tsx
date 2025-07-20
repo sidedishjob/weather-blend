@@ -21,6 +21,10 @@ const mockWeatherData = {
   "札幌": {
     jma: { temperature: 15, weather: "雨", precipitation: 80, source: "気象庁", humidity: 85, windSpeed: 18 },
     yahoo: { temperature: 16, weather: "小雨", precipitation: 70, source: "Yahoo!天気", humidity: 82, windSpeed: 20 }
+  },
+  "青森": {
+    jma: { temperature: 5, weather: "雪", precipitation: 90, source: "気象庁", humidity: 88, windSpeed: 22 },
+    yahoo: { temperature: 6, weather: "雪時々曇り", precipitation: 85, source: "Yahoo!天気", humidity: 85, windSpeed: 25 }
   }
 }
 
@@ -47,6 +51,73 @@ function calculateBlendedWeather(sources: any[]) {
   }
 }
 
+// 天気に応じた背景クラスを取得
+function getWeatherBackgroundClass(weather: string) {
+  const weatherLower = weather.toLowerCase()
+  if (weatherLower.includes('晴') || weatherLower.includes('sunny')) {
+    return 'weather-sunny'
+  }
+  if (weatherLower.includes('雨') || weatherLower.includes('rain')) {
+    return 'weather-rainy'
+  }
+  if (weatherLower.includes('雪') || weatherLower.includes('snow')) {
+    return 'weather-snowy'
+  }
+  if (weatherLower.includes('曇') || weatherLower.includes('cloud')) {
+    return 'weather-cloudy'
+  }
+  return ''
+}
+
+// 雨滴を生成するコンポーネント
+function RainDrops() {
+  const drops = Array.from({ length: 50 }, (_, i) => (
+    <div
+      key={i}
+      className="rain-drop"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${0.5 + Math.random() * 0.5}s`,
+        animationDelay: `${Math.random() * 2}s`,
+      }}
+    />
+  ))
+  return <>{drops}</>
+}
+
+// 雪片を生成するコンポーネント
+function SnowFlakes() {
+  const flakes = Array.from({ length: 30 }, (_, i) => (
+    <div
+      key={i}
+      className="snow-flake"
+      style={{
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${3 + Math.random() * 2}s`,
+        animationDelay: `${Math.random() * 3}s`,
+      }}
+    />
+  ))
+  return <>{flakes}</>
+}
+
+// 雲を生成するコンポーネント
+function CloudElements() {
+  const clouds = Array.from({ length: 3 }, (_, i) => (
+    <div
+      key={i}
+      className="cloud-element"
+      style={{
+        width: `${80 + Math.random() * 40}px`,
+        height: `${40 + Math.random() * 20}px`,
+        top: `${10 + Math.random() * 60}%`,
+        animationDuration: `${20 + Math.random() * 10}s`,
+        animationDelay: `${Math.random() * 10}s`,
+      }}
+    />
+  ))
+  return <>{clouds}</>
+}
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState<string>("")
   const [weatherData, setWeatherData] = useState<any>(null)
@@ -141,7 +212,18 @@ export default function Home() {
       </aside>
 
       {/* 右側メインエリア - 検索結果 */}
-      <main className="flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto relative z-10">
+      <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto relative z-10 ${
+        weatherData ? getWeatherBackgroundClass(weatherData.blended.weather) : ''
+      }`}>
+        {/* 天気アニメーション要素 */}
+        {weatherData && (
+          <>
+            {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-rainy' && <RainDrops />}
+            {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-snowy' && <SnowFlakes />}
+            {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-cloudy' && <CloudElements />}
+          </>
+        )}
+        
         {/* ローディング状態 */}
         {isLoading && (
           <div className="flex items-center justify-center min-h-[60vh]">
