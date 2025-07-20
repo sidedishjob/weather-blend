@@ -85,6 +85,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               <Search className="w-4 h-4" />
             )}
           </Button>
+        </div>
       </div>
       
       <div className="space-y-2">
