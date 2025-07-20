@@ -71,53 +71,134 @@ function getWeatherBackgroundClass(weather: string) {
 
 // 雨滴を生成するコンポーネント
 function RainDrops() {
-  const drops = Array.from({ length: 50 }, (_, i) => (
-    <div
-      key={i}
-      className="rain-drop"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${0.5 + Math.random() * 0.5}s`,
-        animationDelay: `${Math.random() * 2}s`,
-      }}
-    />
-  ))
-  return <>{drops}</>
+  const drops = Array.from({ length: 80 }, (_, i) => {
+    const left = Math.random() * 100
+    const duration = 0.3 + Math.random() * 0.4
+    const delay = Math.random() * 2
+    
+    return (
+      <div key={`rain-${i}`}>
+        <div
+          className="rain-drop"
+          style={{
+            left: `${left}%`,
+            animationDuration: `${duration}s`,
+            animationDelay: `${delay}s`,
+          }}
+        />
+        {/* 雨滴の跳ね返り効果 */}
+        {i % 8 === 0 && (
+          <div
+            className="rain-splash"
+            style={{
+              left: `${left}%`,
+              animationDuration: `0.3s`,
+              animationDelay: `${delay + duration}s`,
+            }}
+          />
+        )}
+        {/* 水たまりの波紋効果 */}
+        {i % 12 === 0 && (
+          <div
+            className="puddle-ripple"
+            style={{
+              left: `${left - 1}%`,
+              animationDuration: `2s`,
+              animationDelay: `${delay + duration + 0.1}s`,
+            }}
+          />
+        )}
+      </div>
+    )
+  })
+  return (
+    <>
+      {drops}
+      {/* 雨の音を表現する背景効果 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-blue-600/10 pointer-events-none"></div>
+    </>
+  )
 }
 
 // 雪片を生成するコンポーネント
 function SnowFlakes() {
-  const flakes = Array.from({ length: 30 }, (_, i) => (
-    <div
-      key={i}
-      className="snow-flake"
-      style={{
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${3 + Math.random() * 2}s`,
-        animationDelay: `${Math.random() * 3}s`,
-      }}
-    />
-  ))
-  return <>{flakes}</>
+  const flakes = Array.from({ length: 40 }, (_, i) => {
+    const size = 3 + Math.random() * 3
+    return (
+      <div
+        key={`snow-${i}`}
+        className="snow-flake"
+        style={{
+          left: `${Math.random() * 100}%`,
+          width: `${size}px`,
+          height: `${size}px`,
+          animationDuration: `${4 + Math.random() * 3}s`,
+          animationDelay: `${Math.random() * 4}s`,
+        }}
+      />
+    )
+  })
+  return (
+    <>
+      {flakes}
+      {/* 雪の積もり効果 */}
+      <div className="snow-accumulation"></div>
+      {/* 冷たい空気の表現 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-100/10 via-transparent to-blue-200/15 pointer-events-none"></div>
+    </>
+  )
 }
 
 // 雲を生成するコンポーネント
 function CloudElements() {
-  const clouds = Array.from({ length: 3 }, (_, i) => (
+  const clouds = Array.from({ length: 4 }, (_, i) => (
     <div
-      key={i}
+      key={`cloud-${i}`}
       className="cloud-element"
       style={{
-        width: `${80 + Math.random() * 40}px`,
-        height: `${40 + Math.random() * 20}px`,
-        top: `${10 + Math.random() * 60}%`,
-        animationDuration: `${20 + Math.random() * 10}s`,
-        animationDelay: `${Math.random() * 10}s`,
+        width: `${100 + Math.random() * 60}px`,
+        height: `${50 + Math.random() * 30}px`,
+        top: `${5 + Math.random() * 70}%`,
+        animationDuration: `${25 + Math.random() * 15}s`,
+        animationDelay: `${Math.random() * 15}s`,
+        opacity: 0.3 + Math.random() * 0.3,
       }}
     />
   ))
-  return <>{clouds}</>
+  return (
+    <>
+      {clouds}
+      {/* 曇り空の重い雰囲気 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-400/8 via-gray-500/5 to-gray-600/10 pointer-events-none"></div>
+    </>
+  )
 }
+
+// 晴れの太陽効果を生成するコンポーネント
+function SunnyEffects() {
+  return (
+    <>
+      {/* 太陽の光線 */}
+      <div className="sun-rays"></div>
+      {/* 暖かい空気の表現 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/10 via-orange-200/5 to-red-200/8 pointer-events-none"></div>
+      {/* キラキラ効果 */}
+      {Array.from({ length: 8 }, (_, i) => (
+        <div
+          key={`sparkle-${i}`}
+          className="absolute w-1 h-1 bg-yellow-300 rounded-full animate-pulse pointer-events-none"
+          style={{
+            top: `${20 + Math.random() * 60}%`,
+            left: `${20 + Math.random() * 60}%`,
+            animationDelay: `${Math.random() * 3}s`,
+            animationDuration: `${2 + Math.random() * 2}s`,
+          }}
+        />
+      ))}
+    </>
+  )
+}
+
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState<string>("")
   const [weatherData, setWeatherData] = useState<any>(null)
@@ -218,6 +299,7 @@ export default function Home() {
         {/* 天気アニメーション要素 */}
         {weatherData && (
           <>
+            {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-sunny' && <SunnyEffects />}
             {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-rainy' && <RainDrops />}
             {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-snowy' && <SnowFlakes />}
             {getWeatherBackgroundClass(weatherData.blended.weather) === 'weather-cloudy' && <CloudElements />}
