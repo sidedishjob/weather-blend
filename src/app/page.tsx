@@ -5,7 +5,7 @@ import { LocationSearch } from "@/components/location-search"
 import { WeatherCard } from "@/components/weather-card"
 import { WeatherSources } from "@/components/weather-sources"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Cloud, Sparkles, TrendingUp, Zap, Menu, X } from "lucide-react"
+import { Cloud, Sparkles, TrendingUp, Zap, Menu, X, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 // モックデータ（実際のAPIと接続時に置き換え）
