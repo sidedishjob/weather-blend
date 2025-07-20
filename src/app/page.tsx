@@ -104,8 +104,8 @@ export default function Home() {
       <div className="absolute top-40 right-20 w-1 h-1 bg-sky-600/70 rounded-full animate-ping"></div>
       <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-400/50 rounded-full animate-bounce"></div>
 
-      {/* ナビゲーションヘッダー */}
-      <nav className="relative z-50 bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-lg">
+      {/* ヘッダー */}
+      <header className="relative z-50 bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* ロゴ */}
@@ -120,51 +120,32 @@ export default function Home() {
               </div>
             </div>
 
-            {/* デスクトップナビゲーション */}
-            <div className="hidden md:flex items-center space-x-6">
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <div className="text-lg font-bold text-blue-900">{currentTime}</div>
-                  <div className="text-blue-700 text-sm">{today}</div>
-                </div>
-              </div>
-              <div className="w-80">
-                <LocationSearch onLocationSelect={handleLocationSelect} />
-              </div>
-            </div>
-
-            {/* モバイルメニューボタン */}
-            <div className="md:hidden">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-blue-700 hover:text-blue-900 hover:bg-blue-100/50"
-              >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </Button>
+            {/* 時間表示 */}
+            <div className="text-right">
+              <div className="text-lg font-bold text-blue-900">{currentTime}</div>
+              <div className="text-blue-700 text-sm">{today}</div>
             </div>
           </div>
         </div>
-
-        {/* モバイルメニュー */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl border-b border-blue-300/50 shadow-lg z-40">
-            <div className="px-4 py-6 space-y-4">
-              <div className="text-center space-y-2">
-                <div className="text-xl font-bold text-blue-900">{currentTime}</div>
-                <div className="text-blue-700">{today}</div>
-              </div>
-              <div className="pt-4 border-t border-blue-300/50">
-                <LocationSearch onLocationSelect={handleLocationSelect} />
-              </div>
-            </div>
-          </div>
-        )}
-      </nav>
+      </header>
 
       {/* メインコンテンツ */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="relative z-10 flex-1 flex">
+        {/* 左側サイドバー - 検索エリア */}
+        <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg">
+          <div className="p-6 space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
+                <Search className="w-5 h-5" />
+                <span>地点検索</span>
+              </h2>
+              <LocationSearch onLocationSelect={handleLocationSelect} />
+            </div>
+          </div>
+        </aside>
+
+        {/* 右側メインエリア - 検索結果 */}
+        <div className="flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto">
         {/* ローディング状態 */}
         {isLoading && (
           <div className="flex items-center justify-center min-h-[60vh]">
@@ -238,25 +219,17 @@ export default function Home() {
                   地点を選択してください
                 </h2>
                 <p className="text-blue-800 leading-relaxed">
-                  上部の検索エリアから都市を選択すると、統合された天気予報が表示されます
+                  左側の検索エリアから都市を選択すると、統合された天気予報が表示されます
                 </p>
-                <div className="block md:hidden pt-4">
-                  <Button
-                    onClick={() => setIsMobileMenuOpen(true)}
-                    className="bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 text-white px-6 py-3 rounded-lg shadow-lg"
-                  >
-                    <Search className="w-4 h-4 mr-2" />
-                    地点を検索
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
         )}
+        </div>
       </main>
 
       {/* フッター */}
-      <footer className="relative z-10 mt-16 py-8 border-t border-blue-300/50 bg-white/80 backdrop-blur-xl">
+      <footer className="relative z-10 py-4 border-t border-blue-300/50 bg-white/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-2">
             <div className="flex justify-center items-center space-x-2">
