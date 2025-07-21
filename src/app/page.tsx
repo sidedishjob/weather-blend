@@ -7,6 +7,7 @@ import { WeatherSources } from "@/components/weather-sources"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Cloud, Sparkles, TrendingUp, Zap, Menu, X, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 // モックデータ（実際のAPIと接続時に置き換え）
 const mockWeatherData = {
@@ -310,6 +311,22 @@ export default function Home() {
               <div className="text-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
                 <div className="text-2xl font-bold text-blue-900">{currentTime}</div>
                 <div className="text-blue-700 text-sm">{today}</div>
+              </div>
+            </div>
+            
+            {/* ナビゲーションリンク */}
+            <div className="absolute bottom-6 left-6 right-6 space-y-3">
+              <div className="flex flex-col space-y-2">
+                <Link href="/about">
+                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 hover:bg-blue-100/50 transition-all duration-300">
+                    <span className="text-sm">WeatherBlendについて</span>
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 hover:bg-blue-100/50 transition-all duration-300">
+                    <span className="text-sm">お問い合わせ</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
