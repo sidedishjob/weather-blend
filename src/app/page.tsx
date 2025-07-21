@@ -278,9 +278,9 @@ export default function Home() {
       </div>
 
       {/* デスクトップ・モバイル共通レイアウト */}
-      <div className="flex flex-col lg:flex-row min-h-screen lg:min-h-auto">
+      <div className="flex flex-col lg:flex-row min-h-screen">
         {/* デスクトップ用サイドバー */}
-        <aside className="hidden lg:block w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10">
+        <aside className="hidden lg:block w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10 min-h-screen">
           <div className="p-6 space-y-6">
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
@@ -316,7 +316,7 @@ export default function Home() {
         </aside>
 
         {/* メインエリア - 検索結果 */}
-        <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 overflow-y-auto relative z-10 ${
+        <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 relative z-10 min-h-screen ${
           weatherData ? getWeatherBackgroundClass(weatherData.blended.weather) : ''
         }`}>
         {/* 天気アニメーション要素 */}
