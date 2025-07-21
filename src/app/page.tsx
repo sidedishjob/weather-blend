@@ -246,7 +246,7 @@ export default function Home() {
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 relative overflow-hidden flex">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 relative overflow-hidden">
       {/* 動的背景エフェクト */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-300/30 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-sky-300/20 via-transparent to-transparent"></div>
@@ -256,46 +256,94 @@ export default function Home() {
       <div className="absolute top-40 right-20 w-1 h-1 bg-sky-600/70 rounded-full animate-ping"></div>
       <div className="absolute bottom-40 left-20 w-3 h-3 bg-blue-400/50 rounded-full animate-bounce"></div>
 
-      {/* 左側サイドバー - 検索エリア */}
-      <aside className="w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10">
-        <div className="p-6 space-y-6">
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
-              <Search className="w-5 h-5" />
-              <span>地点検索</span>
-            </h2>
-            <LocationSearch onLocationSelect={handleLocationSelect} />
+      {/* モバイル用ヘッダー */}
+      <div className="lg:hidden bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-sm relative z-20">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <Cloud className="w-6 h-6 text-blue-700" />
+              <Sparkles className="w-3 h-3 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
+            </div>
+            <h1 className="text-lg font-bold text-blue-900">WeatherBlend</h1>
           </div>
-          
-          {/* ロゴ・時間情報エリア */}
-          <div className="p-6 space-y-6">
-            {/* ロゴ */}
-            <div className="text-center space-y-3">
-              <div className="flex items-center justify-center space-x-3">
-                <div className="relative">
-                  <Cloud className="w-8 h-8 text-blue-700" />
-                  <Sparkles className="w-4 h-4 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-blue-900">WeatherBlend</h1>
-                </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 hover:bg-blue-100/50"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-blue-700" />
+            ) : (
+              <Menu className="w-5 h-5 text-blue-700" />
+            )}
+          </Button>
+        </div>
+        
+        {/* モバイル検索メニュー */}
+        {isMobileMenuOpen && (
+          <div className="border-t border-blue-300/50 bg-white/95 backdrop-blur-xl">
+            <div className="p-4 space-y-4">
+              <div className="space-y-3">
+                <h2 className="text-lg font-bold text-blue-900 flex items-center space-x-2">
+                  <Search className="w-4 h-4" />
+                  <span>地点検索</span>
+                </h2>
+                <LocationSearch onLocationSelect={handleLocationSelect} />
               </div>
-              <p className="text-sm text-blue-700 font-medium">複数の天気予報をブレンド</p>
+              
+              {/* 時間表示 */}
+              <div className="text-center space-y-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                <div className="text-lg font-bold text-blue-900">{currentTime}</div>
+                <div className="text-blue-700 text-sm">{today}</div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* デスクトップ・モバイル共通レイアウト */}
+      <div className="flex flex-col lg:flex-row min-h-screen lg:min-h-auto">
+        {/* デスクトップ用サイドバー */}
+        <aside className="hidden lg:block w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10">
+          <div className="p-6 space-y-6">
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
+                <Search className="w-5 h-5" />
+                <span>地点検索</span>
+              </h2>
+              <LocationSearch onLocationSelect={handleLocationSelect} />
             </div>
             
-            {/* 時間表示 */}
-            <div className="text-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
-              <div className="text-2xl font-bold text-blue-900">{currentTime}</div>
-              <div className="text-blue-700 text-sm">{today}</div>
+            {/* ロゴ・時間情報エリア */}
+            <div className="space-y-6">
+              {/* ロゴ */}
+              <div className="text-center space-y-3">
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="relative">
+                    <Cloud className="w-8 h-8 text-blue-700" />
+                    <Sparkles className="w-4 h-4 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
+                  </div>
+                  <div>
+                    <h1 className="text-2xl font-bold text-blue-900">WeatherBlend</h1>
+                  </div>
+                </div>
+                <p className="text-sm text-blue-700 font-medium">複数の天気予報をブレンド</p>
+              </div>
+              
+              {/* 時間表示 */}
+              <div className="text-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                <div className="text-2xl font-bold text-blue-900">{currentTime}</div>
+                <div className="text-blue-700 text-sm">{today}</div>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-      {/* 右側メインエリア - 検索結果 */}
-      <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto relative z-10 ${
-        weatherData ? getWeatherBackgroundClass(weatherData.blended.weather) : ''
-      }`}>
+        {/* メインエリア - 検索結果 */}
+        <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-4 lg:py-8 overflow-y-auto relative z-10 ${
+          weatherData ? getWeatherBackgroundClass(weatherData.blended.weather) : ''
+        }`}>
         {/* 天気アニメーション要素 */}
         {weatherData && (
           <>
@@ -308,16 +356,16 @@ export default function Home() {
         
         {/* ローディング状態 */}
         {isLoading && (
-          <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="flex items-center justify-center min-h-[50vh] lg:min-h-[60vh]">
             <div className="text-center space-y-6">
-              <div className="relative mx-auto w-20 h-20">
+              <div className="relative mx-auto w-16 h-16 lg:w-20 lg:h-20">
                 <div className="absolute inset-0 rounded-full border-4 border-blue-300/40"></div>
                 <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-600 animate-spin"></div>
-                <Cloud className="w-8 h-8 text-blue-700 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <Cloud className="w-6 h-6 lg:w-8 lg:h-8 text-blue-700 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-blue-900">データ解析中...</h3>
-                <p className="text-blue-700">複数の気象データを統合しています</p>
+                <h3 className="text-lg lg:text-xl font-semibold text-blue-900">データ解析中...</h3>
+                <p className="text-sm lg:text-base text-blue-700">複数の気象データを統合しています</p>
               </div>
             </div>
           </div>
@@ -325,42 +373,42 @@ export default function Home() {
 
         {/* WeatherBlend予報 */}
         {weatherData && !isLoading && (
-          <div className="space-y-8" key={animationKey}>
+          <div className="space-y-6 lg:space-y-8" key={animationKey}>
             <div className="text-center space-y-4 animate-fade-in">
               <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/30 to-sky-500/30 backdrop-blur-sm rounded-full px-6 py-2 border border-blue-400/50">
                 <TrendingUp className="w-4 h-4 text-green-400" />
                 <span className="text-blue-800 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900">
                 WeatherBlend予報
               </h2>
-              <p className="text-blue-800 text-lg md:text-xl">
+              <p className="text-blue-800 text-base md:text-lg lg:text-xl">
                 {selectedLocation}
               </p>
             </div>
             
-            <div className="max-w-md mx-auto transform hover:scale-105 transition-all duration-500">
+            <div className="max-w-sm lg:max-w-md mx-auto transform hover:scale-105 transition-all duration-500">
               <WeatherCard data={weatherData.blended} isBlended={true} />
             </div>
 
             {/* 詳細メトリクス */}
-            <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            <div className="grid grid-cols-2 gap-3 lg:gap-4 max-w-sm lg:max-w-md mx-auto">
               <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
-                <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-600">{Math.round(weatherData.blended.humidity)}%</div>
-                  <div className="text-blue-700 text-sm">湿度</div>
+                <CardContent className="p-3 lg:p-4 text-center">
+                  <div className="text-xl lg:text-2xl font-bold text-blue-600">{Math.round(weatherData.blended.humidity)}%</div>
+                  <div className="text-blue-700 text-xs lg:text-sm">湿度</div>
                 </CardContent>
               </Card>
               <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
-                <CardContent className="p-4 text-center">
-                  <div className="text-2xl font-bold text-green-600">{Math.round(weatherData.blended.windSpeed)}m/s</div>
-                  <div className="text-blue-700 text-sm">風速</div>
+                <CardContent className="p-3 lg:p-4 text-center">
+                  <div className="text-xl lg:text-2xl font-bold text-green-600">{Math.round(weatherData.blended.windSpeed)}m/s</div>
+                  <div className="text-blue-700 text-xs lg:text-sm">風速</div>
                 </CardContent>
               </Card>
             </div>
 
             {/* 各情報源の詳細 */}
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-full lg:max-w-2xl mx-auto">
               <WeatherSources sources={weatherData.sources} />
             </div>
           </div>
@@ -368,24 +416,26 @@ export default function Home() {
 
         {/* 初期状態のメッセージ */}
         {!weatherData && !isLoading && (
-          <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="flex items-center justify-center min-h-[50vh] lg:min-h-[60vh]">
             <div className="text-center space-y-6 max-w-md mx-auto">
-              <div className="relative mx-auto w-24 h-24">
+              <div className="relative mx-auto w-20 h-20 lg:w-24 lg:h-24">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/40 to-sky-500/40 rounded-full animate-pulse"></div>
-                <Cloud className="w-16 h-16 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <Cloud className="w-12 h-12 lg:w-16 lg:h-16 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-bold text-blue-900">
-                  地点を選択してください
+                <h2 className="text-xl lg:text-2xl font-bold text-blue-900">
+                  {isMobileMenuOpen ? '地点を選択してください' : '地点を選択してください'}
                 </h2>
-                <p className="text-blue-800 leading-relaxed">
-                  左側の検索エリアから都市を選択すると、統合された天気予報が表示されます
+                <p className="text-sm lg:text-base text-blue-800 leading-relaxed px-4">
+                  <span className="lg:hidden">上部のメニューから都市を選択すると、統合された天気予報が表示されます</span>
+                  <span className="hidden lg:inline">左側の検索エリアから都市を選択すると、統合された天気予報が表示されます</span>
                 </p>
               </div>
             </div>
           </div>
         )}
-      </main>
+        </main>
+      </div>
 
       <style jsx>{`
         @keyframes fade-in {
