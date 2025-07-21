@@ -256,33 +256,24 @@ export default function Home() {
       {/* モバイル用ヘッダー */}
       {/* モバイル用検索エリア */}
       <div className="lg:hidden bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-sm relative z-20 p-4">
-        <div className="space-y-4">
-          {/* ロゴ */}
-          <div className="text-center">
-            <div className="flex items-center justify-center space-x-3">
+        <div className="space-y-3">
+          {/* コンパクトヘッダー */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
               <div className="relative">
-                <Cloud className="w-6 h-6 text-blue-700" />
-                <Sparkles className="w-3 h-3 text-sky-600 absolute -top-1 -right-1 animate-pulse" />
+                <Cloud className="w-5 h-5 text-blue-700" />
+                <Sparkles className="w-2 h-2 text-sky-600 absolute -top-0.5 -right-0.5 animate-pulse" />
               </div>
-              <h1 className="text-lg font-bold text-blue-900">WeatherBlend</h1>
+              <h1 className="text-base font-bold text-blue-900">WeatherBlend</h1>
             </div>
-            <p className="text-xs text-blue-700 font-medium mt-1">複数の天気予報をブレンド</p>
+            <div className="text-right">
+              <div className="text-sm font-bold text-blue-900">{currentTime}</div>
+              <div className="text-blue-700 text-xs">{today}</div>
+            </div>
           </div>
           
-          {/* 地点検索 */}
-          <div className="space-y-3">
-            <h2 className="text-base font-bold text-blue-900 flex items-center space-x-2">
-              <Search className="w-4 h-4" />
-              <span>地点検索</span>
-            </h2>
-            <LocationSearch onLocationSelect={handleLocationSelect} />
-          </div>
-          
-          {/* 時間表示 */}
-          <div className="text-center space-y-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
-            <div className="text-base font-bold text-blue-900">{currentTime}</div>
-            <div className="text-blue-700 text-xs">{today}</div>
-          </div>
+          {/* ミニマム地点検索 */}
+          <LocationSearch onLocationSelect={handleLocationSelect} />
         </div>
       </div>
 
@@ -325,7 +316,7 @@ export default function Home() {
         </aside>
 
         {/* メインエリア - 検索結果 */}
-        <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-4 lg:py-8 overflow-y-auto relative z-10 ${
+        <main className={`flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 overflow-y-auto relative z-10 ${
           weatherData ? getWeatherBackgroundClass(weatherData.blended.weather) : ''
         }`}>
         {/* 天気アニメーション要素 */}
@@ -411,7 +402,7 @@ export default function Home() {
                   地点を選択してください
                 </h2>
                 <p className="text-sm lg:text-base text-blue-800 leading-relaxed px-4">
-                  <span className="lg:hidden">上部の検索エリアから都市を選択すると、統合された天気予報が表示されます</span>
+                  <span className="lg:hidden">上部から都市を選択すると、統合された天気予報が表示されます</span>
                   <span className="hidden lg:inline">左側の検索エリアから都市を選択すると、統合された天気予報が表示されます</span>
                 </p>
               </div>

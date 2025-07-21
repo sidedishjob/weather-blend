@@ -56,7 +56,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <div className="relative">
         <div className="flex space-x-2">
           <div className="relative flex-1">
@@ -66,7 +66,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               onKeyPress={handleKeyPress}
-              className="pl-10 pr-4 py-2 bg-white/90 backdrop-blur-xl border-blue-400/60 text-blue-900 placeholder:text-blue-700 focus:bg-white/95 focus:border-blue-500/80 transition-all duration-300"
+              className="pl-10 pr-4 py-2 text-sm bg-white/90 backdrop-blur-xl border-blue-400/60 text-blue-900 placeholder:text-blue-700 focus:bg-white/95 focus:border-blue-500/80 transition-all duration-300"
             />
             {location && (
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -77,7 +77,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
           <Button 
             onClick={handleSearch} 
             disabled={isSearching}
-            className="px-4 py-2 bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 border-0 shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50"
+            className="px-3 py-2 bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 border-0 shadow-lg hover:shadow-blue-500/25 transition-all duration-300 disabled:opacity-50"
           >
             {isSearching ? (
               <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></div>
@@ -89,25 +89,21 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
       </div>
       
       <div className="space-y-2">
-        <div className="flex items-center space-x-2">
-          <Clock className="w-3 h-3 text-blue-700" />
-          <span className="text-blue-800 text-xs font-medium">人気の都市</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-4 gap-1.5">
           {popularLocations.map((loc) => (
             <Button
               key={loc.name}
               variant="outline"
               onClick={() => handleLocationClick(loc.name)}
               disabled={isSearching}
-              className="group relative bg-white/80 backdrop-blur-sm border-blue-300/60 text-blue-900 hover:bg-white/90 hover:border-blue-400/80 transition-all duration-300 p-2 h-auto justify-between disabled:opacity-50 text-xs"
+              className="group relative bg-white/80 backdrop-blur-sm border-blue-300/60 text-blue-900 hover:bg-white/90 hover:border-blue-400/80 transition-all duration-300 p-1.5 h-auto justify-center disabled:opacity-50 text-xs"
             >
-              <div className="flex items-center space-x-2">
-                <span className="font-medium">{loc.name}</span>
-                {getTrendIcon(loc.trend)}
-              </div>
-              <div className="text-xs text-blue-700 group-hover:text-blue-800 transition-colors text-xs">
-                {loc.temp}°C
+              <div className="flex flex-col items-center space-y-0.5">
+                <span className="font-medium text-xs">{loc.name}</span>
+                <div className="flex items-center space-x-1">
+                  {getTrendIcon(loc.trend)}
+                  <span className="text-xs text-blue-700">{loc.temp}°</span>
+                </div>
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-sky-500/0 group-hover:from-blue-500/20 group-hover:to-sky-500/20 rounded-md transition-all duration-300"></div>
             </Button>
