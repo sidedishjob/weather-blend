@@ -88,14 +88,14 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
           <Button 
             onClick={handleSearch} 
             disabled={isSearching}
-            className={`px-4 py-2 glass-button border-0 transition-all duration-300 hover-lift
+            className={`px-4 py-2 border-0 transition-all duration-300 hover-lift
               ${isSearching 
-                ? 'bg-gradient-to-r from-blue-400/60 to-sky-400/60 cursor-not-allowed' 
-                : 'bg-gradient-to-r from-blue-500/80 to-sky-500/80 hover:from-blue-600/90 hover:to-sky-600/90 hover:scale-105 active:scale-95'
+                ? 'bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed shadow-md' 
+                : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'
               }
               ${location.trim() 
-                ? 'shadow-lg shadow-blue-500/30 animate-pulse-glow' 
-                : 'shadow-md'
+                ? 'shadow-blue-500/40 animate-pulse-glow ring-2 ring-blue-400/30' 
+                : 'shadow-blue-500/20'
               }`}
           >
             {isSearching ? (
