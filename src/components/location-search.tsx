@@ -21,6 +21,7 @@ const popularLocations = [
 export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
   const [location, setLocation] = useState("")
   const [isSearching, setIsSearching] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
 
   const handleSearch = async () => {
     if (location.trim()) {
@@ -59,17 +60,27 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
     <div className="space-y-3">
       <div className="relative">
         <div className="flex space-x-2">
-          <div className="relative flex-1">
+          <div className={`relative flex-1 transition-all duration-300 ${
+            isFocused ? 'transform scale-[1.02]' : ''
+          }`}>
             <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-700" />
             <Input
               placeholder="都市名を入力"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               onKeyPress={handleKeyPress}
-              className="pl-10 pr-4 py-2 text-sm glass-card border-blue-400/60 text-blue-900 placeholder:text-blue-700 focus:border-blue-500/80 transition-all duration-300 hover-lift"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className={`pl-10 pr-4 py-2 text-sm glass-card text-blue-900 placeholder:text-blue-700 
+                transition-all duration-300 hover-lift
+                ${isFocused 
+                  ? 'border-blue-500/80 shadow-lg shadow-blue-500/25 bg-white/30' 
+                  : 'border-blue-400/60 bg-white/20'
+                }
+                hover:border-blue-500/70 hover:bg-white/25`}
             />
             {location && (
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 animate-pulse">
                 <Sparkles className="w-3 h-3 text-sky-600 animate-pulse" />
               </div>
             )}
@@ -77,12 +88,28 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
           <Button 
             onClick={handleSearch} 
             disabled={isSearching}
-            className="px-3 py-2 glass-button bg-gradient-to-r from-blue-500/80 to-sky-500/80 hover:from-blue-600/90 hover:to-sky-600/90 border-0 transition-all duration-300 disabled:opacity-50 hover-lift"
+            className={`px-4 py-2 glass-button border-0 transition-all duration-300 hover-lift
+              ${isSearching 
+                ? 'bg-gradient-to-r from-blue-400/60 to-sky-400/60 cursor-not-allowed' 
+                : 'bg-gradient-to-r from-blue-500/80 to-sky-500/80 hover:from-blue-600/90 hover:to-sky-600/90 hover:scale-105 active:scale-95'
+              }
+              ${location.trim() 
+                ? 'shadow-lg shadow-blue-500/30 animate-pulse-glow' 
+                : 'shadow-md'
+              }`}
           >
             {isSearching ? (
-              <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></div>
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></div>
+                <span className="text-xs text-white/80">検索中</span>
+              </div>
             ) : (
-              <Search className="w-4 h-4" />
+              <div className="flex items-center space-x-1">
+                <Search className="w-4 h-4" />
+                {location.trim() && (
+                  <span className="text-xs font-medium">検索</span>
+                )}
+              </div>
             )}
           </Button>
         </div>
@@ -96,7 +123,11 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               variant="outline"
               onClick={() => handleLocationClick(loc.name)}
               disabled={isSearching}
-              className="group relative glass-button border-blue-300/60 text-blue-900 transition-all duration-300 p-1.5 h-auto justify-center disabled:opacity-50 text-xs hover-lift"
+              className={`group relative glass-button border-blue-300/60 text-blue-900 transition-all duration-300 p-1.5 h-auto justify-center text-xs hover-lift
+                ${isSearching 
+                  ? 'opacity-50 cursor-not-allowed' 
+                  : 'hover:border-blue-500/70 hover:bg-white/30 hover:scale-105 active:scale-95'
+                }`}
             >
               <div className="flex flex-col items-center space-y-0.5">
                 <span className="font-medium text-xs">{loc.name}</span>
