@@ -369,12 +369,12 @@ export default function Home() {
             <div className="text-center space-y-4 animate-card-fade-in">
               <div className="inline-flex items-center space-x-2 glass-button rounded-full px-6 py-2 animate-bounce-in">
                 <TrendingUp className="w-4 h-4 text-green-400" />
-                <span className="text-blue-800 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
+                <span className="text-blue-900 text-sm font-semibold">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
               </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 animate-stagger-fade-in stagger-1">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-950 animate-stagger-fade-in stagger-1">
                 WeatherBlend予報
               </h2>
-              <p className="text-blue-800 text-base md:text-lg lg:text-xl animate-stagger-fade-in stagger-2">
+              <p className="text-blue-900 text-base md:text-lg lg:text-xl font-medium animate-stagger-fade-in stagger-2">
                 {selectedLocation}
               </p>
             </div>
@@ -399,10 +399,10 @@ export default function Home() {
                 <Cloud className="w-12 h-12 lg:w-16 lg:h-16 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               </div>
               <div className="space-y-3">
-                <h2 className="text-xl lg:text-2xl font-bold text-blue-900">
+                <h2 className="text-xl lg:text-2xl font-bold text-blue-950">
                   地点を選択してください
                 </h2>
-                <p className="text-sm lg:text-base text-blue-800 leading-relaxed px-4">
+                <p className="text-sm lg:text-base text-blue-900 font-medium leading-relaxed px-4">
                   <span className="lg:hidden">上部から都市を選択すると、統合された天気予報が表示されます</span>
                   <span className="hidden lg:inline">左側の検索エリアから都市を選択すると、統合された天気予報が表示されます</span>
                 </p>

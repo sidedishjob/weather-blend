@@ -74,8 +74,8 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               className={`pl-10 pr-4 py-2 text-sm glass-card text-blue-900 placeholder:text-blue-700 
                 transition-all duration-300 hover-lift
                 ${isFocused 
-                  ? 'border-blue-500/80 shadow-lg shadow-blue-500/25 bg-white/30' 
-                  : 'border-blue-400/60 bg-white/20'
+                  ? 'border-blue-600/90 shadow-lg shadow-blue-500/25 bg-white/40' 
+                  : 'border-blue-500/70 bg-white/30'
                 }
                 `}
             />
@@ -90,24 +90,24 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
             disabled={isSearching}
             className={`px-4 py-2 border-0 transition-all duration-300 hover-lift
               ${isSearching 
-                ? 'bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed shadow-md' 
-                : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 cursor-not-allowed shadow-md' 
+                : 'bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl'
               }
               ${location.trim() 
-                ? 'shadow-blue-500/40 animate-pulse-glow ring-2 ring-blue-400/30' 
-                : 'shadow-blue-500/20'
+                ? 'shadow-blue-600/50 animate-pulse-glow ring-2 ring-blue-500/40' 
+                : 'shadow-blue-600/30'
               }`}
           >
             {isSearching ? (
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></div>
-                <span className="text-xs text-white/80">検索中</span>
+                <span className="text-xs text-white font-medium">検索中</span>
               </div>
             ) : (
               <div className="flex items-center space-x-1">
                 <Search className="w-4 h-4 text-white" />
                 {location.trim() && (
-                  <span className="text-xs font-medium text-white">検索</span>
+                  <span className="text-xs font-semibold text-white">検索</span>
                 )}
               </div>
             )}
@@ -125,15 +125,15 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               disabled={isSearching}
               className={`group relative glass-button border-blue-300/60 text-blue-900 transition-all duration-300 p-1.5 h-auto justify-center text-xs hover-lift
                 ${isSearching 
-                  ? 'opacity-50 cursor-not-allowed' 
-                  : 'hover:border-blue-500/70 hover:bg-white/30 hover:scale-105 active:scale-95'
+                  ? 'opacity-60 cursor-not-allowed' 
+                  : 'hover:border-blue-600/80 hover:bg-white/40 hover:scale-105 active:scale-95'
                 }`}
             >
               <div className="flex flex-col items-center space-y-0.5">
                 <span className="font-medium text-xs">{loc.name}</span>
                 <div className="flex items-center space-x-1">
                   {getTrendIcon(loc.trend)}
-                  <span className="text-xs text-blue-700">{loc.temp}°</span>
+                  <span className="text-xs text-blue-800 font-medium">{loc.temp}°</span>
                 </div>
               </div>
             </Button>

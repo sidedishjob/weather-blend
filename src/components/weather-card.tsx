@@ -98,7 +98,7 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
                   isBlended ? 'text-xl text-blue-800' : 'text-sm text-blue-700/80'
                 } font-medium`}>
                 <div className={`${
-                  isBlended ? 'text-xl text-blue-900' : 'text-sm text-blue-800'
+                  isBlended ? 'text-xl text-blue-950' : 'text-sm text-blue-900'
                 } font-medium`}>
                   {data.weather}
                 </div>
@@ -116,7 +116,7 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
                 </div>
               </div>
               <div className={`${
-                isBlended ? 'text-sm text-blue-700' : 'text-xs text-blue-700'
+                isBlended ? 'text-sm text-blue-800' : 'text-xs text-blue-800'
               }`}>
                 降水確率
               </div>
@@ -125,12 +125,12 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
           
           {!isBlended && (
             <div className="mt-3 flex items-center justify-between">
-              <div className="text-xs text-blue-700 font-medium">
+              <div className="text-xs text-blue-800 font-medium">
                 {data.source}
               </div>
               <div className="flex items-center space-x-1">
-                <Thermometer className="w-3 h-3 text-blue-600" />
-                <span className="text-xs text-blue-700">
+                <Thermometer className="w-3 h-3 text-blue-700" />
+                <span className="text-xs text-blue-800">
                   体感温度 {Math.round(data.temperature + (Math.random() - 0.5) * 4)}°C
                 </span>
               </div>
@@ -144,8 +144,8 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
                 <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
                   <Droplets className="w-5 h-5 text-blue-500" />
                   <div className="text-left">
-                    <div className="text-blue-700 text-sm">湿度</div>
-                    <div className="text-xl font-bold text-blue-600">{Math.round(data.humidity || 65)}%</div>
+                    <div className="text-blue-800 text-sm font-medium">湿度</div>
+                    <div className="text-xl font-bold text-blue-700">{Math.round(data.humidity || 65)}%</div>
                   </div>
                 </div>
                 <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
@@ -153,23 +153,23 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
                     <div className="text-green-500 text-lg">💨</div>
                   </div>
                   <div className="text-left">
-                    <div className="text-blue-700 text-sm">風速</div>
-                    <div className="text-xl font-bold text-green-600">{Math.round(data.windSpeed || 12)}m/s</div>
+                    <div className="text-blue-800 text-sm font-medium">風速</div>
+                    <div className="text-xl font-bold text-green-700">{Math.round(data.windSpeed || 12)}m/s</div>
                   </div>
                 </div>
               </div>
               
               {/* 信頼度 */}
               <div className="flex items-center justify-between">
-                <span className="text-blue-800 text-sm">予報信頼度</span>
+                <span className="text-blue-900 text-sm font-medium">予報信頼度</span>
                 <div className="flex items-center space-x-2">
-                  <div className="w-20 h-2 bg-blue-300/50 rounded-full overflow-hidden">
+                  <div className="w-20 h-2 bg-blue-400/60 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-green-400 to-blue-400 rounded-full transition-all duration-1000"
+                      className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-1000"
                       style={{ width: `${data.confidence}%` }}
                     ></div>
                   </div>
-                  <span className="text-blue-900 font-medium text-sm">{Math.round(data.confidence)}%</span>
+                  <span className="text-blue-950 font-semibold text-sm">{Math.round(data.confidence)}%</span>
                 </div>
               </div>
             </div>
