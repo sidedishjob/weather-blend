@@ -133,7 +133,20 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
           )}
           
           {isBlended && data.confidence && (
-            <div className="mt-6 pt-4 border-t border-blue-300/50">
+            <div className="mt-6 pt-4 border-t border-blue-300/50 space-y-4">
+              {/* 詳細メトリクス */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                  <div className="text-2xl font-bold text-blue-600">{Math.round(data.humidity || 65)}%</div>
+                  <div className="text-blue-700 text-sm">湿度</div>
+                </div>
+                <div className="text-center p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                  <div className="text-2xl font-bold text-green-600">{Math.round(data.windSpeed || 12)}m/s</div>
+                  <div className="text-blue-700 text-sm">風速</div>
+                </div>
+              </div>
+              
+              {/* 信頼度 */}
               <div className="flex items-center justify-between">
                 <span className="text-blue-800 text-sm">予報信頼度</span>
                 <div className="flex items-center space-x-2">

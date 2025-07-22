@@ -383,22 +383,6 @@ export default function Home() {
               <WeatherCard data={weatherData.blended} isBlended={true} />
             </div>
 
-            {/* 詳細メトリクス */}
-            <div className="grid grid-cols-2 gap-3 lg:gap-4 max-w-sm lg:max-w-md mx-auto">
-              <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
-                <CardContent className="p-3 lg:p-4 text-center">
-                  <div className="text-xl lg:text-2xl font-bold text-blue-600">{Math.round(weatherData.blended.humidity)}%</div>
-                  <div className="text-blue-700 text-xs lg:text-sm">湿度</div>
-                </CardContent>
-              </Card>
-              <Card className="bg-white/80 backdrop-blur-xl border-blue-300/50 hover:bg-white/90 transition-all duration-300">
-                <CardContent className="p-3 lg:p-4 text-center">
-                  <div className="text-xl lg:text-2xl font-bold text-green-600">{Math.round(weatherData.blended.windSpeed)}m/s</div>
-                  <div className="text-blue-700 text-xs lg:text-sm">風速</div>
-                </CardContent>
-              </Card>
-            </div>
-
             {/* 各情報源の詳細 */}
             <div className="max-w-full lg:max-w-2xl mx-auto">
               <WeatherSources sources={weatherData.sources} />
