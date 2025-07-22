@@ -136,13 +136,21 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
             <div className="mt-6 pt-4 border-t border-blue-300/50 space-y-4">
               {/* 詳細メトリクス */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
-                  <div className="text-2xl font-bold text-blue-600">{Math.round(data.humidity || 65)}%</div>
-                  <div className="text-blue-700 text-sm">湿度</div>
+                <div className="flex items-center justify-center space-x-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                  <Droplets className="w-5 h-5 text-blue-500" />
+                  <div className="text-left">
+                    <div className="text-blue-700 text-sm">湿度</div>
+                    <div className="text-xl font-bold text-blue-600">{Math.round(data.humidity || 65)}%</div>
+                  </div>
                 </div>
-                <div className="text-center p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
-                  <div className="text-2xl font-bold text-green-600">{Math.round(data.windSpeed || 12)}m/s</div>
-                  <div className="text-blue-700 text-sm">風速</div>
+                <div className="flex items-center justify-center space-x-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    <div className="text-green-500 text-lg">💨</div>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-blue-700 text-sm">風速</div>
+                    <div className="text-xl font-bold text-green-600">{Math.round(data.windSpeed || 12)}m/s</div>
+                  </div>
                 </div>
               </div>
               
