@@ -256,7 +256,7 @@ export default function Home() {
 
       {/* モバイル用ヘッダー */}
       {/* モバイル用検索エリア */}
-      <div className="lg:hidden bg-white/90 backdrop-blur-xl border-b border-blue-300/50 shadow-sm relative z-20 p-4">
+      <div className="lg:hidden glass-header relative z-20 p-4">
         <div className="space-y-3">
           {/* コンパクトヘッダー */}
           <div className="flex items-center justify-between">
@@ -281,7 +281,7 @@ export default function Home() {
       {/* デスクトップ・モバイル共通レイアウト */}
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* デスクトップ用サイドバー */}
-        <aside className="hidden lg:block w-80 bg-white/80 backdrop-blur-xl border-r border-blue-300/50 shadow-lg relative z-10 min-h-screen">
+        <aside className="hidden lg:block w-80 glass-sidebar relative z-10 min-h-screen">
           <div className="p-6 space-y-6">
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
@@ -308,7 +308,7 @@ export default function Home() {
               </div>
               
               {/* 時間表示 */}
-              <div className="text-center space-y-2 p-4 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+              <div className="text-center space-y-2 p-4 glass-card rounded-lg hover-lift">
                 <div className="text-2xl font-bold text-blue-900">{currentTime}</div>
                 <div className="text-blue-700 text-sm">{today}</div>
               </div>
@@ -318,12 +318,12 @@ export default function Home() {
             <div className="absolute bottom-6 left-6 right-6 space-y-3">
               <div className="flex flex-col space-y-2">
                 <Link href="/about">
-                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 hover:bg-blue-100/50 transition-all duration-300">
+                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 glass-button transition-all duration-300">
                     <span className="text-sm">WeatherBlendについて</span>
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 hover:bg-blue-100/50 transition-all duration-300">
+                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 glass-button transition-all duration-300">
                     <span className="text-sm">お問い合わせ</span>
                   </Button>
                 </Link>
@@ -366,25 +366,25 @@ export default function Home() {
         {/* WeatherBlend予報 */}
         {weatherData && !isLoading && (
           <div className="space-y-6 lg:space-y-8" key={animationKey}>
-            <div className="text-center space-y-4 animate-fade-in">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/30 to-sky-500/30 backdrop-blur-sm rounded-full px-6 py-2 border border-blue-400/50">
+            <div className="text-center space-y-4 animate-card-fade-in">
+              <div className="inline-flex items-center space-x-2 glass-button rounded-full px-6 py-2 animate-bounce-in">
                 <TrendingUp className="w-4 h-4 text-green-400" />
                 <span className="text-blue-800 text-sm font-medium">信頼度 {Math.round(weatherData.blended.confidence)}%</span>
               </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 animate-stagger-fade-in stagger-1">
                 WeatherBlend予報
               </h2>
-              <p className="text-blue-800 text-base md:text-lg lg:text-xl">
+              <p className="text-blue-800 text-base md:text-lg lg:text-xl animate-stagger-fade-in stagger-2">
                 {selectedLocation}
               </p>
             </div>
             
-            <div className="max-w-sm lg:max-w-md mx-auto transform hover:scale-105 transition-all duration-500">
+            <div className="max-w-sm lg:max-w-md mx-auto animate-card-slide-up">
               <WeatherCard data={weatherData.blended} isBlended={true} />
             </div>
 
             {/* 各情報源の詳細 */}
-            <div className="max-w-full lg:max-w-2xl mx-auto">
+            <div className="max-w-full lg:max-w-2xl mx-auto animate-stagger-fade-in stagger-3">
               <WeatherSources sources={weatherData.sources} />
             </div>
           </div>

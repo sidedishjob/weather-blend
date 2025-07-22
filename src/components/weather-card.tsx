@@ -56,19 +56,22 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
   return (
     <Card className={`${
       isBlended 
-        ? 'bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-2xl border-2 border-blue-400/60 shadow-2xl hover:shadow-blue-500/30' 
-        : 'bg-white/85 backdrop-blur-xl border-blue-300/50 hover:bg-white/95'
-    } transition-all duration-500 group`}>
+        ? 'glass-card border-2 border-blue-400/60 animate-pulse-glow hover-lift' 
+        : 'glass-card border-blue-300/50 hover-lift'
+    } transition-all duration-500 group relative overflow-hidden`}>
       <CardContent className={`${isBlended ? 'p-8' : 'p-4'} relative overflow-hidden`}>
         {/* 背景装飾 */}
         {isBlended && (
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-sky-500/20 opacity-60"></div>
+          <>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-transparent to-sky-500/20 opacity-60"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-sky-400 to-blue-500 opacity-60"></div>
+          </>
         )}
         
         <div className="relative z-10">
           {isBlended && (
             <div className="text-center mb-6">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/40 to-sky-500/40 backdrop-blur-sm rounded-full px-4 py-1 border border-blue-400/50">
+              <div className="inline-flex items-center space-x-2 glass-button rounded-full px-4 py-1 animate-bounce-in">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span className="text-blue-900 text-sm font-medium">統合予報</span>
               </div>
@@ -136,14 +139,14 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
             <div className="mt-6 pt-4 border-t border-blue-300/50 space-y-4">
               {/* 詳細メトリクス */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center justify-center space-x-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
                   <Droplets className="w-5 h-5 text-blue-500" />
                   <div className="text-left">
                     <div className="text-blue-700 text-sm">湿度</div>
                     <div className="text-xl font-bold text-blue-600">{Math.round(data.humidity || 65)}%</div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center space-x-2 p-3 bg-white/60 backdrop-blur-sm rounded-lg border border-blue-300/40">
+                <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
                   <div className="w-5 h-5 flex items-center justify-center">
                     <div className="text-green-500 text-lg">💨</div>
                   </div>

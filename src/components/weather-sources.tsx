@@ -26,7 +26,7 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
         <CollapsibleTrigger asChild>
           <Button 
             variant="ghost" 
-            className="w-full justify-between p-6 h-auto bg-white/80 backdrop-blur-xl border border-blue-300/60 hover:bg-white/90 hover:border-blue-400/70 transition-all duration-300 group"
+            className="w-full justify-between p-6 h-auto glass-card hover-lift transition-all duration-300 group"
           >
             <div className="flex items-center space-x-3">
               <Database className="w-5 h-5 text-blue-600 group-hover:text-blue-700 transition-colors" />
@@ -51,14 +51,14 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
         <CollapsibleContent className="space-y-4 mt-4">
           <div className="grid gap-4">
             {sources.map((source, index) => (
-              <div key={index} className="transform hover:scale-105 transition-all duration-300">
+              <div key={index} className={`animate-stagger-fade-in stagger-${index + 1}`}>
                 <WeatherCard data={source} />
               </div>
             ))}
           </div>
           
           {/* 比較統計 */}
-          <div className="mt-6 p-4 bg-white/80 backdrop-blur-xl border border-blue-300/60 rounded-lg">
+          <div className="mt-6 p-4 glass-card rounded-lg hover-lift animate-stagger-fade-in stagger-3">
             <div className="flex items-center space-x-2 mb-4">
               <BarChart3 className="w-4 h-4 text-blue-600" />
               <span className="text-blue-800 text-sm font-medium">データ比較</span>
