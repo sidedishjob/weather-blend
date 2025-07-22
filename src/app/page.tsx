@@ -380,7 +380,7 @@ export default function Home() {
             </div>
             
             <div className="max-w-sm lg:max-w-md mx-auto animate-card-slide-up">
-              <WeatherCard data={weatherData.blended} isBlended={true} />
+              <WeatherCard data={weatherData.blended} isBlended={true} cityName={selectedLocation} />
             </div>
 
             {/* 各情報源の詳細 */}

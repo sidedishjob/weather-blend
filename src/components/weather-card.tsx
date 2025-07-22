@@ -7,11 +7,14 @@ interface WeatherData {
   precipitation: number
   source: string
   confidence?: number
+  humidity?: number
+  windSpeed?: number
 }
 
 interface WeatherCardProps {
   data: WeatherData
   isBlended?: boolean
+  cityName?: string
 }
 
 const getWeatherIcon = (weather: string, isBlended = false) => {
@@ -52,7 +55,7 @@ const getPrecipitationColor = (precipitation: number) => {
   return "text-blue-400"
 }
 
-export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
+export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardProps) {
   return (
     <Card className={`${
       isBlended 
@@ -69,12 +72,11 @@ export function WeatherCard({ data, isBlended = false }: WeatherCardProps) {
         )}
         
         <div className="relative z-10">
-          {isBlended && (
+          {isBlended && cityName && (
             <div className="text-center mb-6">
-              <div className="inline-flex items-center space-x-2 glass-button rounded-full px-4 py-1 animate-bounce-in">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-blue-900 text-sm font-medium">統合予報</span>
-              </div>
+              <h3 className="text-2xl font-bold text-blue-900 animate-bounce-in">
+                {cityName}
+              </h3>
             </div>
           )}
           
