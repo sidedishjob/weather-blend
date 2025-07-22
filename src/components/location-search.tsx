@@ -77,7 +77,7 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
                   ? 'border-blue-500/80 shadow-lg shadow-blue-500/25 bg-white/30' 
                   : 'border-blue-400/60 bg-white/20'
                 }
-                hover:border-blue-500/70 hover:bg-white/25`}
+                `}
             />
             {location && (
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 animate-pulse">
@@ -105,9 +105,9 @@ export function LocationSearch({ onLocationSelect }: LocationSearchProps) {
               </div>
             ) : (
               <div className="flex items-center space-x-1">
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4 text-white" />
                 {location.trim() && (
-                  <span className="text-xs font-medium">検索</span>
+                  <span className="text-xs font-medium text-white">検索</span>
                 )}
               </div>
             )}
