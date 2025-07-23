@@ -81,6 +81,7 @@ export default function MapPage() {
             <Card className="glass-card border-blue-300/50 shadow-lg">
               <CardContent className="p-4 lg:p-6">
                 <div className="relative w-full aspect-[4/5] lg:aspect-[3/4] bg-gradient-to-b from-sky-100 to-blue-100 rounded-lg overflow-hidden">
+                <div className="relative w-full aspect-[6/5] lg:aspect-[4/3] bg-gradient-to-b from-sky-100 to-blue-100 rounded-lg overflow-hidden">
                   {/* 海の背景 */}
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 via-blue-500/30 to-blue-600/40"></div>
                   
@@ -91,7 +92,7 @@ export default function MapPage() {
                   </div>
                   
                   {/* 北海道 */}
-                  <div className="absolute top-[8%] left-[45%] w-[20%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 rounded-full transform rotate-12 shadow-lg">
+                  <div className="absolute top-[8%] left-[48%] w-[18%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 rounded-full transform rotate-12 shadow-lg">
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
                     {/* 山脈の表現 */}
                     <div className="absolute top-[30%] left-[20%] w-3 h-3 bg-gray-400/60 rounded-full"></div>
@@ -99,7 +100,7 @@ export default function MapPage() {
                   </div>
                   
                   {/* 本州 */}
-                  <div className="absolute top-[25%] left-[35%] w-[32%] h-[40%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform -rotate-6 shadow-lg" 
+                  <div className="absolute top-[25%] left-[38%] w-[30%] h-[40%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform -rotate-6 shadow-lg" 
                        style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}>
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40" 
                          style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}></div>
@@ -112,14 +113,14 @@ export default function MapPage() {
                   </div>
                   
                   {/* 四国 */}
-                  <div className="absolute top-[58%] left-[40%] w-[14%] h-[12%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-3 shadow-md"
+                  <div className="absolute top-[58%] left-[42%] w-[13%] h-[12%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-3 shadow-md"
                        style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}>
                     <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40"
                          style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}></div>
                   </div>
                   
                   {/* 九州 */}
-                  <div className="absolute top-[65%] left-[28%] w-[18%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-8 shadow-md"
+                  <div className="absolute top-[65%] left-[25%] w-[16%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-8 shadow-md"
                        style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}>
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40"
                          style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}></div>
@@ -128,14 +129,14 @@ export default function MapPage() {
                   </div>
                   
                   {/* 沖縄諸島 */}
-                  <div className="absolute top-[85%] left-[25%] w-[10%] h-[6%] bg-gradient-to-br from-green-300/80 to-green-400/70 rounded-full shadow-sm">
+                  <div className="absolute top-[85%] left-[20%] w-[9%] h-[6%] bg-gradient-to-br from-green-300/80 to-green-400/70 rounded-full shadow-sm">
                     <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
                   </div>
                   
                   {/* 小さな島々 */}
-                  <div className="absolute top-[85%] left-[35%] w-2 h-2 bg-green-400/60 rounded-full shadow-sm"></div>
-                  <div className="absolute top-[82%] left-[32%] w-1 h-1 bg-green-400/60 rounded-full"></div>
-                  <div className="absolute top-[45%] left-[72%] w-1 h-1 bg-green-400/60 rounded-full"></div>
+                  <div className="absolute top-[85%] left-[30%] w-2 h-2 bg-green-400/60 rounded-full shadow-sm"></div>
+                  <div className="absolute top-[82%] left-[28%] w-1 h-1 bg-green-400/60 rounded-full"></div>
+                  <div className="absolute top-[45%] left-[75%] w-1 h-1 bg-green-400/60 rounded-full"></div>
                   
                   {/* 雲の影 */}
                   <div className="absolute top-[15%] left-[20%] w-16 h-8 bg-gray-300/20 rounded-full blur-sm animate-pulse" style={{animationDuration: '8s'}}></div>
@@ -168,15 +169,15 @@ export default function MapPage() {
                         }`}></div>
                         
                         {/* 都市情報カード */}
-                        <div className={`relative glass-card border-blue-300/60 p-1.5 lg:p-2 min-w-[70px] lg:min-w-[85px] transition-all duration-300 ${
+                        <div className={`relative glass-card border-blue-300/60 p-1.5 lg:p-2 min-w-[65px] lg:min-w-[75px] transition-all duration-300 ${
                           isSelected ? 'border-blue-500/80 shadow-lg' : ''
                         }`}>
                           <div className="text-center space-y-1">
                             <div className="flex items-center justify-center">
-                              <IconComponent className={`w-3 h-3 lg:w-4 lg:h-4 ${getWeatherColor(city.weather)}`} />
+                              <IconComponent className={`w-2.5 h-2.5 lg:w-3.5 lg:h-3.5 ${getWeatherColor(city.weather)}`} />
                             </div>
-                            <div className="text-xs font-bold text-blue-900">{city.name}</div>
-                            <div className={`text-xs lg:text-sm font-bold ${getTemperatureColor(city.temp)}`}>
+                            <div className="text-xs font-bold text-blue-900 leading-tight">{city.name}</div>
+                            <div className={`text-xs font-bold ${getTemperatureColor(city.temp)}`}>
                               {city.temp}°C
                             </div>
                           </div>
