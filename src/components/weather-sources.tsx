@@ -49,7 +49,7 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="space-y-4 mt-4">
-          <div className="grid gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {sources.map((source, index) => (
               <div key={index} className={`animate-stagger-fade-in stagger-${index + 1}`}>
                 <WeatherCard data={source} />
@@ -58,34 +58,38 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
           </div>
           
           {/* 比較統計 */}
-          <div className="mt-4 sm:mt-6 p-3 sm:p-4 glass-card rounded-lg hover-lift animate-stagger-fade-in stagger-3">
+          <div className="mt-3 sm:mt-4 p-3 sm:p-4 glass-card rounded-lg hover-lift animate-stagger-fade-in stagger-3">
             <div className="flex items-center space-x-2 mb-3 sm:mb-4">
               <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 text-blue-700" />
               <span className="text-blue-900 text-xs sm:text-sm font-semibold">データ比較</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
-              <div className="space-y-1 sm:space-y-2">
-                <div className="flex justify-between">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
+              <div className="space-y-1">
+                <div className="flex flex-col sm:flex-row sm:justify-between">
                   <span className="text-blue-800 font-medium">気温差</span>
                   <span className="text-blue-950 font-semibold">
                     {Math.abs(sources[0]?.temperature - sources[1]?.temperature).toFixed(1)}°C
                   </span>
                 </div>
-                <div className="flex justify-between">
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-col sm:flex-row sm:justify-between">
                   <span className="text-blue-800 font-medium">降水確率差</span>
                   <span className="text-blue-950 font-semibold">
                     {Math.abs(sources[0]?.precipitation - sources[1]?.precipitation)}%
                   </span>
                 </div>
               </div>
-              <div className="space-y-1 sm:space-y-2">
-                <div className="flex justify-between">
+              <div className="space-y-1">
+                <div className="flex flex-col sm:flex-row sm:justify-between">
                   <span className="text-blue-800 font-medium">データ一致度</span>
                   <span className="text-green-700 font-semibold">
                     {Math.max(70, 100 - Math.abs(sources[0]?.temperature - sources[1]?.temperature) * 10)}%
                   </span>
                 </div>
-                <div className="flex justify-between">
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-col sm:flex-row sm:justify-between">
                   <span className="text-blue-800 font-medium">更新時刻</span>
                   <span className="text-blue-800 text-xs sm:text-xs font-medium">
                     {new Date().toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}

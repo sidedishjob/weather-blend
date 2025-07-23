@@ -124,11 +124,11 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
           </div>
           
           {!isBlended && (
-            <div className="mt-3 flex items-center justify-between">
+            <div className="mt-2 sm:mt-3 flex items-center justify-between">
               <div className="text-xs text-blue-800 font-medium">
                 {data.source}
               </div>
-              <div className="flex items-center space-x-1">
+              <div className="hidden sm:flex items-center space-x-1">
                 <Thermometer className="w-3 h-3 text-blue-700" />
                 <span className="text-xs text-blue-800">
                   体感温度 {Math.round(data.temperature + (Math.random() - 0.5) * 4)}°C
