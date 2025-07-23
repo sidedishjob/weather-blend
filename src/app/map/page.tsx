@@ -8,15 +8,15 @@ import Link from "next/link"
 
 // 主要都市のデータ
 const majorCities = [
-  { id: 'sapporo', name: '札幌', x: 52, y: 15, temp: 15, weather: '雨', icon: CloudRain },
-  { id: 'sendai', name: '仙台', x: 58, y: 35, temp: 18, weather: '曇り', icon: Cloud },
-  { id: 'tokyo', name: '東京', x: 55, y: 45, temp: 22, weather: '晴れ', icon: Sun },
-  { id: 'nagoya', name: '名古屋', x: 50, y: 50, temp: 20, weather: '曇り', icon: Cloud },
-  { id: 'osaka', name: '大阪', x: 48, y: 55, temp: 25, weather: '晴れ', icon: Sun },
-  { id: 'hiroshima', name: '広島', x: 45, y: 60, temp: 23, weather: '晴れ時々曇り', icon: Sun },
-  { id: 'fukuoka', name: '福岡', x: 40, y: 70, temp: 24, weather: '曇り', icon: Cloud },
-  { id: 'kagoshima', name: '鹿児島', x: 42, y: 80, temp: 26, weather: '晴れ', icon: Sun },
-  { id: 'naha', name: '那覇', x: 35, y: 90, temp: 28, weather: '晴れ', icon: Sun },
+  { id: 'sapporo', name: '札幌', x: 55, y: 12, temp: 15, weather: '雨', icon: CloudRain },
+  { id: 'sendai', name: '仙台', x: 65, y: 32, temp: 18, weather: '曇り', icon: Cloud },
+  { id: 'tokyo', name: '東京', x: 68, y: 42, temp: 22, weather: '晴れ', icon: Sun },
+  { id: 'nagoya', name: '名古屋', x: 58, y: 48, temp: 20, weather: '曇り', icon: Cloud },
+  { id: 'osaka', name: '大阪', x: 55, y: 52, temp: 25, weather: '晴れ', icon: Sun },
+  { id: 'hiroshima', name: '広島', x: 48, y: 58, temp: 23, weather: '晴れ時々曇り', icon: Sun },
+  { id: 'fukuoka', name: '福岡', x: 38, y: 68, temp: 24, weather: '曇り', icon: Cloud },
+  { id: 'kagoshima', name: '鹿児島', x: 42, y: 78, temp: 26, weather: '晴れ', icon: Sun },
+  { id: 'naha', name: '那覇', x: 28, y: 88, temp: 28, weather: '晴れ', icon: Sun },
 ]
 
 const getTemperatureColor = (temp: number) => {
@@ -91,7 +91,7 @@ export default function MapPage() {
                   </div>
                   
                   {/* 北海道 */}
-                  <div className="absolute top-[8%] left-[48%] w-[18%] h-[22%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 rounded-full transform rotate-12 shadow-lg">
+                  <div className="absolute top-[8%] left-[45%] w-[20%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 rounded-full transform rotate-12 shadow-lg">
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
                     {/* 山脈の表現 */}
                     <div className="absolute top-[30%] left-[20%] w-3 h-3 bg-gray-400/60 rounded-full"></div>
@@ -99,7 +99,7 @@ export default function MapPage() {
                   </div>
                   
                   {/* 本州 */}
-                  <div className="absolute top-[28%] left-[38%] w-[28%] h-[42%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform -rotate-6 shadow-lg" 
+                  <div className="absolute top-[25%] left-[35%] w-[32%] h-[40%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform -rotate-6 shadow-lg" 
                        style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}>
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40" 
                          style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}></div>
@@ -112,14 +112,14 @@ export default function MapPage() {
                   </div>
                   
                   {/* 四国 */}
-                  <div className="absolute top-[62%] left-[42%] w-[12%] h-[15%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-3 shadow-md"
+                  <div className="absolute top-[58%] left-[40%] w-[14%] h-[12%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-3 shadow-md"
                        style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}>
                     <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40"
                          style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}></div>
                   </div>
                   
                   {/* 九州 */}
-                  <div className="absolute top-[68%] left-[32%] w-[16%] h-[20%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-8 shadow-md"
+                  <div className="absolute top-[65%] left-[28%] w-[18%] h-[18%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-8 shadow-md"
                        style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}>
                     <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40"
                          style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}></div>
@@ -128,7 +128,7 @@ export default function MapPage() {
                   </div>
                   
                   {/* 沖縄諸島 */}
-                  <div className="absolute top-[88%] left-[28%] w-[8%] h-[8%] bg-gradient-to-br from-green-300/80 to-green-400/70 rounded-full shadow-sm">
+                  <div className="absolute top-[85%] left-[25%] w-[10%] h-[6%] bg-gradient-to-br from-green-300/80 to-green-400/70 rounded-full shadow-sm">
                     <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
                   </div>
                   
@@ -168,15 +168,15 @@ export default function MapPage() {
                         }`}></div>
                         
                         {/* 都市情報カード */}
-                        <div className={`relative glass-card border-blue-300/60 p-2 lg:p-3 min-w-[80px] lg:min-w-[100px] transition-all duration-300 ${
+                        <div className={`relative glass-card border-blue-300/60 p-1.5 lg:p-2 min-w-[70px] lg:min-w-[85px] transition-all duration-300 ${
                           isSelected ? 'border-blue-500/80 shadow-lg' : ''
                         }`}>
                           <div className="text-center space-y-1">
                             <div className="flex items-center justify-center">
-                              <IconComponent className={`w-4 h-4 lg:w-5 lg:h-5 ${getWeatherColor(city.weather)}`} />
+                              <IconComponent className={`w-3 h-3 lg:w-4 lg:h-4 ${getWeatherColor(city.weather)}`} />
                             </div>
-                            <div className="text-xs lg:text-sm font-bold text-blue-900">{city.name}</div>
-                            <div className={`text-sm lg:text-base font-bold ${getTemperatureColor(city.temp)}`}>
+                            <div className="text-xs font-bold text-blue-900">{city.name}</div>
+                            <div className={`text-xs lg:text-sm font-bold ${getTemperatureColor(city.temp)}`}>
                               {city.temp}°C
                             </div>
                           </div>
