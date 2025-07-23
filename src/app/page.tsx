@@ -327,6 +327,11 @@ export default function Home() {
                     <span className="text-sm">お問い合わせ</span>
                   </Button>
                 </Link>
+                <Link href="/map">
+                  <Button variant="ghost" className="w-full justify-start text-blue-700 hover:text-blue-900 glass-button transition-all duration-300">
+                    <span className="text-sm">日本地図で確認</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
