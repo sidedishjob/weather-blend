@@ -62,7 +62,7 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
         ? 'glass-card border-2 border-blue-400/60 animate-pulse-glow hover-lift' 
         : 'glass-card border-blue-300/50 hover-lift'
     } transition-all duration-500 group relative overflow-hidden`}>
-      <CardContent className={`${isBlended ? 'p-8' : 'p-4'} relative overflow-hidden`}>
+      <CardContent className={`${isBlended ? 'p-4 sm:p-6 lg:p-8' : 'p-3 sm:p-4'} relative overflow-hidden`}>
         {/* 背景装飾 */}
         {isBlended && (
           <>
@@ -73,24 +73,24 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
         
         <div className="relative z-10">
           {isBlended && cityName && (
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-bold text-blue-900 animate-bounce-in">
+            <div className="text-center mb-3 sm:mb-4 lg:mb-6">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900 animate-bounce-in">
                 {cityName}
               </h3>
             </div>
           )}
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex items-center space-x-3 sm:space-x-4 lg:space-x-6">
               <div className="relative">
                 {getWeatherIcon(data.weather, isBlended)}
                 {isBlended && (
                   <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/30 to-sky-400/30 rounded-full blur-xl"></div>
                 )}
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1 sm:space-y-2">
                 <div className={`font-bold ${
-                  isBlended ? 'text-5xl' : 'text-2xl'
+                  isBlended ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-xl sm:text-2xl'
                 } ${getTemperatureColor(data.temperature)} drop-shadow-lg`}>
                   {Math.round(data.temperature)}°C
                 </div>
@@ -98,7 +98,7 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
                   isBlended ? 'text-xl text-blue-800' : 'text-sm text-blue-700/80'
                 } font-medium`}>
                 <div className={`${
-                  isBlended ? 'text-xl text-blue-950' : 'text-sm text-blue-900'
+                  isBlended ? 'text-sm sm:text-base lg:text-xl text-blue-950' : 'text-xs sm:text-sm text-blue-900'
                 } font-medium`}>
                   {data.weather}
                 </div>
@@ -106,17 +106,17 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
               </div>
             </div>
             
-            <div className="text-right space-y-2">
-              <div className="flex items-center space-x-2">
-                <Droplets className={`${isBlended ? 'w-6 h-6' : 'w-4 h-4'} text-blue-400`} />
+            <div className="text-right space-y-1 sm:space-y-2 flex-shrink-0">
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <Droplets className={`${isBlended ? 'w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6' : 'w-3 h-3 sm:w-4 sm:h-4'} text-blue-400`} />
                 <div className={`font-bold ${
-                  isBlended ? 'text-3xl' : 'text-xl'
+                  isBlended ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-base sm:text-xl'
                 } ${getPrecipitationColor(data.precipitation)}`}>
                   {Math.round(data.precipitation)}%
                 </div>
               </div>
               <div className={`${
-                isBlended ? 'text-sm text-blue-800' : 'text-xs text-blue-800'
+                isBlended ? 'text-xs sm:text-sm text-blue-800' : 'text-xs text-blue-800'
               }`}>
                 降水確率
               </div>
@@ -138,38 +138,38 @@ export function WeatherCard({ data, isBlended = false, cityName }: WeatherCardPr
           )}
           
           {isBlended && data.confidence && (
-            <div className="mt-6 pt-4 border-t border-blue-300/50 space-y-4">
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-blue-300/50 space-y-3 sm:space-y-4">
               {/* 詳細メトリクス */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
-                  <Droplets className="w-5 h-5 text-blue-500" />
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
+                <div className="flex items-center justify-center space-x-1 sm:space-x-2 p-2 sm:p-3 glass-card rounded-lg hover-lift">
+                  <Droplets className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
                   <div className="text-left">
-                    <div className="text-blue-800 text-sm font-medium">湿度</div>
-                    <div className="text-xl font-bold text-blue-700">{Math.round(data.humidity || 65)}%</div>
+                    <div className="text-blue-800 text-xs sm:text-sm font-medium">湿度</div>
+                    <div className="text-base sm:text-xl font-bold text-blue-700">{Math.round(data.humidity || 65)}%</div>
                   </div>
                 </div>
-                <div className="flex items-center justify-center space-x-2 p-3 glass-card rounded-lg hover-lift">
-                  <div className="w-5 h-5 flex items-center justify-center">
-                    <div className="text-green-500 text-lg">💨</div>
+                <div className="flex items-center justify-center space-x-1 sm:space-x-2 p-2 sm:p-3 glass-card rounded-lg hover-lift">
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                    <div className="text-green-500 text-sm sm:text-lg">💨</div>
                   </div>
                   <div className="text-left">
-                    <div className="text-blue-800 text-sm font-medium">風速</div>
-                    <div className="text-xl font-bold text-green-700">{Math.round(data.windSpeed || 12)}m/s</div>
+                    <div className="text-blue-800 text-xs sm:text-sm font-medium">風速</div>
+                    <div className="text-base sm:text-xl font-bold text-green-700">{Math.round(data.windSpeed || 12)}m/s</div>
                   </div>
                 </div>
               </div>
               
               {/* 信頼度 */}
               <div className="flex items-center justify-between">
-                <span className="text-blue-900 text-sm font-medium">予報信頼度</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-20 h-2 bg-blue-400/60 rounded-full overflow-hidden">
+                <span className="text-blue-900 text-xs sm:text-sm font-medium">予報信頼度</span>
+                <div className="flex items-center space-x-1 sm:space-x-2">
+                  <div className="w-16 sm:w-20 h-2 bg-blue-400/60 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gradient-to-r from-green-500 to-blue-500 rounded-full transition-all duration-1000"
                       style={{ width: `${data.confidence}%` }}
                     ></div>
                   </div>
-                  <span className="text-blue-950 font-semibold text-sm">{Math.round(data.confidence)}%</span>
+                  <span className="text-blue-950 font-semibold text-xs sm:text-sm">{Math.round(data.confidence)}%</span>
                 </div>
               </div>
             </div>
