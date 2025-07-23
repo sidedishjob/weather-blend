@@ -81,17 +81,65 @@ export default function MapPage() {
             <Card className="glass-card border-blue-300/50 shadow-lg">
               <CardContent className="p-4 lg:p-6">
                 <div className="relative w-full aspect-[4/5] lg:aspect-[3/4] bg-gradient-to-b from-sky-100 to-blue-100 rounded-lg overflow-hidden">
-                  {/* 日本地図のSVG風背景 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-100/50 via-yellow-100/30 to-blue-100/50"></div>
+                  {/* 海の背景 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 via-blue-500/30 to-blue-600/40"></div>
                   
-                  {/* 海の表現 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-200/30 via-sky-200/20 to-blue-300/40"></div>
+                  {/* 海の波紋効果 */}
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-[20%] left-[10%] w-32 h-32 border border-blue-300 rounded-full animate-ping" style={{animationDuration: '4s'}}></div>
+                    <div className="absolute top-[60%] right-[15%] w-24 h-24 border border-blue-300 rounded-full animate-ping" style={{animationDuration: '6s', animationDelay: '2s'}}></div>
+                  </div>
                   
-                  {/* 島の輪郭（簡易版） */}
-                  <div className="absolute top-[10%] left-[45%] w-[15%] h-[25%] bg-green-200/60 rounded-full transform rotate-12"></div>
-                  <div className="absolute top-[30%] left-[40%] w-[25%] h-[40%] bg-green-200/60 rounded-full transform -rotate-6"></div>
-                  <div className="absolute top-[65%] left-[35%] w-[20%] h-[25%] bg-green-200/60 rounded-full transform rotate-3"></div>
-                  <div className="absolute top-[85%] left-[30%] w-[12%] h-[10%] bg-green-200/60 rounded-full"></div>
+                  {/* 北海道 */}
+                  <div className="absolute top-[8%] left-[48%] w-[18%] h-[22%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 rounded-full transform rotate-12 shadow-lg">
+                    <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
+                    {/* 山脈の表現 */}
+                    <div className="absolute top-[30%] left-[20%] w-3 h-3 bg-gray-400/60 rounded-full"></div>
+                    <div className="absolute top-[25%] left-[35%] w-2 h-2 bg-gray-400/60 rounded-full"></div>
+                  </div>
+                  
+                  {/* 本州 */}
+                  <div className="absolute top-[28%] left-[38%] w-[28%] h-[42%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform -rotate-6 shadow-lg" 
+                       style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}>
+                    <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40" 
+                         style={{borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%'}}></div>
+                    {/* 富士山 */}
+                    <div className="absolute top-[60%] left-[70%] w-3 h-3 bg-gray-300 rounded-full shadow-sm"></div>
+                    {/* 日本アルプス */}
+                    <div className="absolute top-[45%] left-[40%] w-2 h-2 bg-gray-400/60 rounded-full"></div>
+                    <div className="absolute top-[40%] left-[45%] w-2 h-2 bg-gray-400/60 rounded-full"></div>
+                    <div className="absolute top-[50%] left-[35%] w-1 h-1 bg-gray-400/60 rounded-full"></div>
+                  </div>
+                  
+                  {/* 四国 */}
+                  <div className="absolute top-[62%] left-[42%] w-[12%] h-[15%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-3 shadow-md"
+                       style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}>
+                    <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40"
+                         style={{borderRadius: '50% 60% 40% 50% / 40% 60% 50% 40%'}}></div>
+                  </div>
+                  
+                  {/* 九州 */}
+                  <div className="absolute top-[68%] left-[32%] w-[16%] h-[20%] bg-gradient-to-br from-green-300/80 via-green-400/70 to-green-500/60 transform rotate-8 shadow-md"
+                       style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}>
+                    <div className="absolute inset-2 bg-gradient-to-br from-green-200/60 to-green-300/40"
+                         style={{borderRadius: '40% 60% 50% 40% / 60% 40% 60% 50%'}}></div>
+                    {/* 阿蘇山 */}
+                    <div className="absolute top-[40%] left-[60%] w-2 h-2 bg-red-400/60 rounded-full"></div>
+                  </div>
+                  
+                  {/* 沖縄諸島 */}
+                  <div className="absolute top-[88%] left-[28%] w-[8%] h-[8%] bg-gradient-to-br from-green-300/80 to-green-400/70 rounded-full shadow-sm">
+                    <div className="absolute inset-1 bg-gradient-to-br from-green-200/60 to-green-300/40 rounded-full"></div>
+                  </div>
+                  
+                  {/* 小さな島々 */}
+                  <div className="absolute top-[85%] left-[35%] w-2 h-2 bg-green-400/60 rounded-full shadow-sm"></div>
+                  <div className="absolute top-[82%] left-[32%] w-1 h-1 bg-green-400/60 rounded-full"></div>
+                  <div className="absolute top-[45%] left-[72%] w-1 h-1 bg-green-400/60 rounded-full"></div>
+                  
+                  {/* 雲の影 */}
+                  <div className="absolute top-[15%] left-[20%] w-16 h-8 bg-gray-300/20 rounded-full blur-sm animate-pulse" style={{animationDuration: '8s'}}></div>
+                  <div className="absolute top-[70%] right-[10%] w-12 h-6 bg-gray-300/20 rounded-full blur-sm animate-pulse" style={{animationDuration: '10s', animationDelay: '3s'}}></div>
 
                   {/* 都市マーカー */}
                   {majorCities.map((city) => {
