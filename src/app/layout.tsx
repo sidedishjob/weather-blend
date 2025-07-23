@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "WeatherBlend - 複数の天気予報をまとめて確認",
-  description: "気象庁とYahoo!天気の予報をブレンドして、最適な天気予報をお届けします",
+  description:
+    "気象庁とYahoo!天気の予報をブレンドして、最適な天気予報をお届けします",
 };
 
 export default function RootLayout({
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
