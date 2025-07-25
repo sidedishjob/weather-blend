@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp, Cloud } from "lucide-react";
+import { Cloud } from "lucide-react";
 import { WeatherCard } from "@/components/weather-card";
 import { WeatherSources } from "@/components/weather-sources";
 
