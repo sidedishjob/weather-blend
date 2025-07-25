@@ -46,18 +46,9 @@ export const WeatherResult = ({
     return (
       <div className="space-y-4 sm:space-y-6 lg:space-y-8" key={animationKey}>
         <div className="text-center space-y-2 sm:space-y-4 animate-card-fade-in px-2">
-          <div className="inline-flex items-center space-x-2 glass-button rounded-full px-6 py-2 animate-bounce-in">
-            <TrendingUp className="w-4 h-4 text-green-400" />
-            <span className="text-blue-900 text-xs sm:text-sm font-semibold">
-              信頼度 {Math.round(weatherData.blended.confidence)}%
-            </span>
-          </div>
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-950 animate-stagger-fade-in stagger-1">
             WeatherBlend予報
           </h2>
-          <p className="text-blue-900 text-sm sm:text-base md:text-lg lg:text-xl font-semibold animate-stagger-fade-in stagger-2">
-            {selectedLocation}
-          </p>
         </div>
 
         <div className="max-w-full sm:max-w-sm lg:max-w-md mx-auto animate-card-slide-up px-2 sm:px-0">
