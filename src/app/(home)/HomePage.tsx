@@ -6,6 +6,12 @@ import { WeatherEffects } from "@/components/home/WeatherEffects";
 import { Sidebar } from "@/components/home/Sidebar";
 import { MobileHeader } from "@/components/home/MobileHeader";
 import { WeatherResult } from "@/components/home/WeatherResult";
+import type { WeatherSource, BlendedWeather } from "@/types/weather";
+
+type WeatherState = {
+  blended: BlendedWeather;
+  sources: WeatherSource[];
+} | null;
 
 // モックデータ（実際のAPIと接続時に置き換え）
 const mockWeatherData = {
@@ -103,7 +109,7 @@ function getWeatherBackgroundClass(weather: string) {
 
 export const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<WeatherState>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const handleLocationSelect = async (location: string) => {

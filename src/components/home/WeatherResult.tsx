@@ -3,11 +3,12 @@
 import { Cloud } from "lucide-react";
 import { WeatherCard } from "@/components/weather-card";
 import { WeatherSources } from "@/components/weather-sources";
+import type { BlendedWeather, WeatherSource } from "@/types/weather";
 
 interface WeatherResultProps {
   weatherData: {
-    blended: any;
-    sources: any[];
+    blended: BlendedWeather;
+    sources: WeatherSource[];
   } | null;
   isLoading: boolean;
   selectedLocation: string;
