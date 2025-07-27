@@ -13,16 +13,7 @@ interface SidebarProps {
 export const Sidebar = ({ onLocationSelect }: SidebarProps) => {
   return (
     <aside className="hidden lg:block w-80 glass-sidebar relative z-10 min-h-screen">
-      <div className="p-6 space-y-6">
-        {/* 地点検索 */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
-            <Search className="w-5 h-5" />
-            <span>地点検索</span>
-          </h2>
-          <LocationSearch onLocationSelect={onLocationSelect} />
-        </div>
-
+      <div className="p-6 space-y-8">
         {/* ロゴと説明 */}
         <div className="space-y-6">
           <div className="text-center space-y-3">
@@ -34,9 +25,18 @@ export const Sidebar = ({ onLocationSelect }: SidebarProps) => {
               <h1 className="text-2xl font-bold text-blue-900">WeatherBlend</h1>
             </div>
             <p className="text-sm text-blue-700 font-medium">
-              複数の天気予報をブレンド
+              複数の天気予報をまとめて確認
             </p>
           </div>
+        </div>
+
+        {/* 地点検索 */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold text-blue-900 flex items-center space-x-2">
+            <Search className="w-5 h-5" />
+            <span>地点検索</span>
+          </h2>
+          <LocationSearch onLocationSelect={onLocationSelect} />
         </div>
 
         {/* ナビゲーションリンク */}

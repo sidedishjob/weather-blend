@@ -77,7 +77,7 @@ export const WeatherResult = ({
           <Cloud className="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-blue-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
         </div>
         <div className="space-y-2 sm:space-y-3">
-          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-950">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900">
             地点を選択してください
           </h2>
           <p className="text-xs sm:text-sm lg:text-base text-blue-900 font-medium leading-relaxed">
