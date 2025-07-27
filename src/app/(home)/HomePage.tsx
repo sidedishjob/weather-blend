@@ -170,13 +170,13 @@ export const HomePage = () => {
       <MobileHeader onLocationSelect={handleLocationSelect} />
 
       {/* デスクトップ・モバイル共通レイアウト */}
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col lg:flex-row min-h-[70vh]">
         {/* デスクトップ用サイドバー */}
         <Sidebar onLocationSelect={handleLocationSelect} />
 
         {/* メインエリア - 検索結果 */}
         <main
-          className={`flex-1 px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 relative z-10 min-h-screen ${
+          className={`flex-1 px-3 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 relative z-10 min-h-[70vh] ${
             weatherData
               ? getWeatherBackgroundClass(weatherData.blended.weather)
               : ""
