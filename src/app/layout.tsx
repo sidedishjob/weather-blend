@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { generateMetadata } from "@/constants/metadata";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,11 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "WeatherBlend - 複数の天気予報をまとめて確認",
-  description:
-    "気象庁とYahoo!天気の予報をブレンドして、最適な天気予報をお届けします",
-};
+export const metadata = generateMetadata();
 
 export default function RootLayout({
   children,
