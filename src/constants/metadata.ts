@@ -2,7 +2,7 @@ export const siteMetadata = {
   // 基本情報
   title: "WeatherBlend | 複数の天気予報をまとめて確認",
   titleBase: "WeatherBlend",
-  titleSuffix: "複数の天気予報をまとめて確認。",
+  titleSuffix: "複数の天気予報をまとめて確認",
   description:
     "気象庁、Yahoo天気などの天気予報をまとめて比較・表示。予報の違いや傾向をひと目で把握できる、天気比較特化の情報アプリ。",
   siteUrl: "https://weatherblend.info",
@@ -40,7 +40,7 @@ export const siteMetadata = {
     url: "https://weatherblend.info/ogp.png",
     width: 1200,
     height: 630,
-    alt: "WeatherBlend - 複数の天気予報をまとめて確認。",
+    alt: "WeatherBlend - 複数の天気予報をまとめて確認",
   },
 
   // ファビコン
