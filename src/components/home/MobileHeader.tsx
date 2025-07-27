@@ -4,16 +4,10 @@ import { Cloud, Sparkles } from "lucide-react";
 import { LocationSearch } from "@/components/location-search";
 
 interface MobileHeaderProps {
-  currentTime: string;
-  today: string;
   onLocationSelect: (location: string) => void;
 }
 
-export const MobileHeader = ({
-  currentTime,
-  today,
-  onLocationSelect,
-}: MobileHeaderProps) => {
+export const MobileHeader = ({ onLocationSelect }: MobileHeaderProps) => {
   return (
     <div className="lg:hidden glass-header relative z-20 p-4">
       <div className="space-y-3">
@@ -25,10 +19,6 @@ export const MobileHeader = ({
               <Sparkles className="w-2 h-2 text-sky-600 absolute -top-0.5 -right-0.5 animate-pulse" />
             </div>
             <h1 className="text-base font-bold text-blue-900">WeatherBlend</h1>
-          </div>
-          <div className="text-right">
-            <div className="text-sm font-bold text-blue-900">{currentTime}</div>
-            <div className="text-blue-700 text-xs">{today}</div>
           </div>
         </div>
 

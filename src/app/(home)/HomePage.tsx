@@ -154,17 +154,6 @@ export const HomePage = () => {
     setAnimationKey((prev) => prev + 1);
   };
 
-  const today = new Date().toLocaleDateString("ja-JP", {
-    month: "long",
-    day: "numeric",
-    weekday: "short",
-  });
-
-  const currentTime = new Date().toLocaleTimeString("ja-JP", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-100 to-blue-200 relative overflow-hidden">
       {/* 動的背景エフェクト */}
@@ -178,20 +167,12 @@ export const HomePage = () => {
 
       {/* モバイル用ヘッダー */}
       {/* モバイル用検索エリア */}
-      <MobileHeader
-        currentTime={currentTime}
-        today={today}
-        onLocationSelect={handleLocationSelect}
-      />
+      <MobileHeader onLocationSelect={handleLocationSelect} />
 
       {/* デスクトップ・モバイル共通レイアウト */}
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* デスクトップ用サイドバー */}
-        <Sidebar
-          currentTime={currentTime}
-          today={today}
-          onLocationSelect={handleLocationSelect}
-        />
+        <Sidebar onLocationSelect={handleLocationSelect} />
 
         {/* メインエリア - 検索結果 */}
         <main

@@ -7,16 +7,10 @@ import { Cloud, Sparkles } from "lucide-react";
 import { LocationSearch } from "@/components/location-search";
 
 interface SidebarProps {
-  currentTime: string;
-  today: string;
   onLocationSelect: (location: string) => void;
 }
 
-export const Sidebar = ({
-  currentTime,
-  today,
-  onLocationSelect,
-}: SidebarProps) => {
+export const Sidebar = ({ onLocationSelect }: SidebarProps) => {
   return (
     <aside className="hidden lg:block w-80 glass-sidebar relative z-10 min-h-screen">
       <div className="p-6 space-y-6">
@@ -42,14 +36,6 @@ export const Sidebar = ({
             <p className="text-sm text-blue-700 font-medium">
               複数の天気予報をブレンド
             </p>
-          </div>
-
-          {/* 時間表示 */}
-          <div className="text-center space-y-2 p-4 glass-card rounded-lg hover-lift">
-            <div className="text-2xl font-bold text-blue-900">
-              {currentTime}
-            </div>
-            <div className="text-blue-700 text-sm">{today}</div>
           </div>
         </div>
 
