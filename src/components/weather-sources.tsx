@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown, ChevronUp, BarChart3, Database } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -6,19 +7,10 @@ import {
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { WeatherCard } from "@/components/weather-card";
-import { ChevronDown, ChevronUp, BarChart3, Database } from "lucide-react";
-
-interface WeatherData {
-  temperature: number;
-  weather: string;
-  precipitation: number;
-  source: string;
-  humidity?: number;
-  windSpeed?: number;
-}
+import type { WeatherSource } from "@/types/weather";
 
 interface WeatherSourcesProps {
-  sources: WeatherData[];
+  sources: WeatherSource[];
 }
 
 export function WeatherSources({ sources }: WeatherSourcesProps) {
@@ -84,7 +76,7 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
                   <span className="text-blue-800 font-medium">気温差</span>
                   <span className="text-blue-950 font-semibold">
                     {Math.abs(
-                      sources[0]?.temperature - sources[1]?.temperature
+                      sources[0].temperature - sources[1].temperature
                     ).toFixed(1)}
                     °C
                   </span>
@@ -95,7 +87,7 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
                   <span className="text-blue-800 font-medium">降水確率差</span>
                   <span className="text-blue-950 font-semibold">
                     {Math.abs(
-                      sources[0]?.precipitation - sources[1]?.precipitation
+                      sources[0].precipitation - sources[1].precipitation
                     )}
                     %
                   </span>
@@ -111,7 +103,7 @@ export function WeatherSources({ sources }: WeatherSourcesProps) {
                       70,
                       100 -
                         Math.abs(
-                          sources[0]?.temperature - sources[1]?.temperature
+                          sources[0].temperature - sources[1].temperature
                         ) *
                           10
                     )}

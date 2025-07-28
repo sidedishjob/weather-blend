@@ -1,18 +1,19 @@
 import type { WeatherSource, BlendedWeather } from "@/types/weather";
 
+// WeatherSource のうち数値型のキーを抽出
+type AvgKeys = "temperature" | "precipitation" | "humidity" | "windSpeed";
+
 export function calculateBlendedWeather(
   sources: WeatherSource[]
 ): BlendedWeather {
-  const avg = <K extends keyof WeatherSource>(key: K): number => {
+  const avg = (key: AvgKeys): number => {
     const values = sources.map((s) => s[key]);
 
-    if (typeof values[0] !== "number") {
-      throw new Error(`Invalid key "${String(key)}" - expected number.`);
+    if (values.length === 0) {
+      throw new Error(`No values for key "${key}".`);
     }
 
-    return (
-      (values as number[]).reduce((sum, val) => sum + val, 0) / values.length
-    );
+    return values.reduce((sum, val) => sum + val, 0) / values.length;
   };
 
   const avgTemp = avg("temperature");
@@ -26,10 +27,13 @@ export function calculateBlendedWeather(
   else if (avgPrecip > 30) weather = "曇り";
   else if (avgPrecip > 10) weather = "晴れ時々曇り";
 
-  const confidence = Math.max(
-    85,
-    100 - Math.abs(sources[0].temperature - sources[1].temperature) * 5
-  );
+  const confidence =
+    sources.length >= 2
+      ? Math.max(
+          85,
+          100 - Math.abs(sources[0].temperature - sources[1].temperature) * 5
+        )
+      : 90;
 
   return {
     temperature: avgTemp,
@@ -37,7 +41,6 @@ export function calculateBlendedWeather(
     precipitation: avgPrecip,
     humidity: avgHumidity,
     windSpeed: avgWind,
-    source: "WeatherBlend",
     confidence,
   };
 }

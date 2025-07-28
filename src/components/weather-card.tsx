@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Cloud,
   Sun,
@@ -8,19 +7,12 @@ import {
   Thermometer,
   Droplets,
 } from "lucide-react";
-
-interface WeatherData {
-  temperature: number;
-  weather: string;
-  precipitation: number;
-  source: string;
-  confidence?: number;
-  humidity?: number;
-  windSpeed?: number;
-}
+import { Card, CardContent } from "@/components/ui/card";
+import type { WeatherSource, BlendedWeather } from "@/types/weather";
+import { WEATHER_SOURCE_LABELS } from "@/constants/weather";
 
 interface WeatherCardProps {
-  data: WeatherData;
+  data: WeatherSource | BlendedWeather;
   isBlended?: boolean;
   cityName?: string;
 }
@@ -70,6 +62,9 @@ export function WeatherCard({
   isBlended = false,
   cityName,
 }: WeatherCardProps) {
+  // WeatherSourceかBlendedWeatherかを判定
+  const isWeatherSource = "source" in data;
+
   return (
     <Card
       className={`${
@@ -166,10 +161,10 @@ export function WeatherCard({
             </div>
           </div>
 
-          {!isBlended && (
+          {!isBlended && isWeatherSource && (
             <div className="mt-2 sm:mt-3 flex items-center justify-between">
               <div className="text-xs text-blue-800 font-medium">
-                {data.source}
+                {WEATHER_SOURCE_LABELS[data.source]}
               </div>
               <div className="hidden sm:flex items-center space-x-1">
                 <Thermometer className="w-3 h-3 text-blue-700" />
@@ -181,7 +176,7 @@ export function WeatherCard({
             </div>
           )}
 
-          {isBlended && data.confidence && (
+          {isBlended && "confidence" in data && (
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-blue-300/50 space-y-3 sm:space-y-4">
               {/* 詳細メトリクス */}
               <div className="grid grid-cols-2 gap-2 sm:gap-4">
@@ -192,7 +187,7 @@ export function WeatherCard({
                       湿度
                     </div>
                     <div className="text-base sm:text-xl font-bold text-blue-700">
-                      {Math.round(data.humidity || 65)}%
+                      {Math.round(data.humidity)}%
                     </div>
                   </div>
                 </div>
@@ -205,7 +200,7 @@ export function WeatherCard({
                       風速
                     </div>
                     <div className="text-base sm:text-xl font-bold text-green-700">
-                      {Math.round(data.windSpeed || 12)}m/s
+                      {Math.round(data.windSpeed)}m/s
                     </div>
                   </div>
                 </div>

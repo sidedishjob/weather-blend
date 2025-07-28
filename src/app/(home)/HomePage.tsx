@@ -14,13 +14,16 @@ type WeatherState = {
 } | null;
 
 // モックデータ（実際のAPIと接続時に置き換え）
-const mockWeatherData = {
+const mockWeatherData: Record<
+  string,
+  { jma: WeatherSource; yahoo: WeatherSource }
+> = {
   東京: {
     jma: {
       temperature: 22,
       weather: "晴れ",
       precipitation: 10,
-      source: "気象庁",
+      source: "jma",
       humidity: 65,
       windSpeed: 12,
     },
@@ -28,7 +31,7 @@ const mockWeatherData = {
       temperature: 24,
       weather: "晴れ時々曇り",
       precipitation: 20,
-      source: "Yahoo!天気",
+      source: "yahoo",
       humidity: 68,
       windSpeed: 15,
     },
@@ -38,7 +41,7 @@ const mockWeatherData = {
       temperature: 5,
       weather: "雪",
       precipitation: 90,
-      source: "気象庁",
+      source: "jma",
       humidity: 72,
       windSpeed: 8,
     },
@@ -46,7 +49,7 @@ const mockWeatherData = {
       temperature: 2,
       weather: "曇り時々雪",
       precipitation: 85,
-      source: "Yahoo!天気",
+      source: "yahoo",
       humidity: 70,
       windSpeed: 10,
     },
@@ -56,7 +59,7 @@ const mockWeatherData = {
       temperature: 15,
       weather: "雨",
       precipitation: 80,
-      source: "気象庁",
+      source: "jma",
       humidity: 85,
       windSpeed: 18,
     },
@@ -64,7 +67,7 @@ const mockWeatherData = {
       temperature: 16,
       weather: "小雨",
       precipitation: 70,
-      source: "Yahoo!天気",
+      source: "yahoo",
       humidity: 82,
       windSpeed: 20,
     },
@@ -74,7 +77,7 @@ const mockWeatherData = {
       temperature: 5,
       weather: "雪",
       precipitation: 90,
-      source: "気象庁",
+      source: "jma",
       humidity: 88,
       windSpeed: 22,
     },
@@ -82,7 +85,7 @@ const mockWeatherData = {
       temperature: 6,
       weather: "雪時々曇り",
       precipitation: 85,
-      source: "Yahoo!天気",
+      source: "yahoo",
       humidity: 85,
       windSpeed: 25,
     },
@@ -112,43 +115,39 @@ export const HomePage = () => {
   const [weatherData, setWeatherData] = useState<WeatherState>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
+
   const handleLocationSelect = async (location: string) => {
     setIsLoading(true);
     setSelectedLocation(location);
 
-    // アニメーション効果のための遅延
     await new Promise((resolve) => setTimeout(resolve, 800));
 
-    // モックデータから取得（実際のAPIと接続時に置き換え）
     const locationData =
       mockWeatherData[location as keyof typeof mockWeatherData];
-    if (locationData) {
-      const sources = [locationData.jma, locationData.yahoo];
-      const blended = calculateBlendedWeather(sources);
-      setWeatherData({ blended, sources });
-    } else {
-      // デフォルトデータ
-      const sources = [
-        {
-          temperature: 20,
-          weather: "晴れ",
-          precipitation: 15,
-          source: "気象庁",
-          humidity: 60,
-          windSpeed: 10,
-        },
-        {
-          temperature: 22,
-          weather: "晴れ時々曇り",
-          precipitation: 25,
-          source: "Yahoo!天気",
-          humidity: 65,
-          windSpeed: 12,
-        },
-      ];
-      const blended = calculateBlendedWeather(sources);
-      setWeatherData({ blended, sources });
-    }
+
+    const sources: WeatherSource[] = locationData
+      ? [locationData.jma, locationData.yahoo]
+      : [
+          {
+            temperature: 20,
+            weather: "晴れ",
+            precipitation: 15,
+            source: "jma",
+            humidity: 60,
+            windSpeed: 10,
+          },
+          {
+            temperature: 22,
+            weather: "晴れ時々曇り",
+            precipitation: 25,
+            source: "yahoo",
+            humidity: 65,
+            windSpeed: 12,
+          },
+        ];
+
+    const blended = calculateBlendedWeather(sources);
+    setWeatherData({ blended, sources });
 
     setIsLoading(false);
     setAnimationKey((prev) => prev + 1);
